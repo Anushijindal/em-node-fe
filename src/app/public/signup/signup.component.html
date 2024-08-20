@@ -1,0 +1,131 @@
+<div class="auth-main">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="auth-header">
+        <a href="javascript:"
+          ><img src="../../../assets/images/logo-dark.svg" alt="logo img"
+        /></a>
+      </div>
+      <div class="card my-5">
+        <div class="card-body">
+          <form [formGroup]="signupForm">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+              <h3 class="mb-0"><b>Sign up</b></h3>
+              <a [routerLink]="['/login']" class="link-primary"
+                >Already have an account?</a
+              >
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="firstName">First Name<span class="error-msg">*</span></label>
+                  <input
+                    formControlName="firstname"
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    placeholder="First Name"
+                  />@if(signupForm.get('firstname').hasError('required') &&
+                  signupForm.get('firstname').touched){
+
+                  <p class="text-red-600 text-sm ml-0">
+                    Please Enter First Name
+                  </p>
+                  }
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="lastName">Last Name<span class="error-msg">*</span></label>
+                  <input
+                    formControlName="lastname"
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    placeholder="Last Name"
+                  />@if(signupForm.get('lastname').hasError('required') &&
+                  signupForm.get('lastname').touched){
+
+                  <p class="text-red-600 text-sm ml-0">
+                    Please Enter Last Name
+                  </p>
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label class="form-label" for="emailAddress"
+                >Email Address<span class="error-msg">*</span></label
+              >
+              <input
+                type="email"
+                formControlName="email"
+                class="form-control"
+                id="emailAddress"
+                placeholder="Email Address"
+              />@if(signupForm.get('email').hasError('required') &&
+              signupForm.get('email').touched){
+
+              <p class="text-red-600 text-sm ml-0">Please Enter Email</p>
+              } @if(signupForm.get('email').hasError('pattern') &&
+              signupForm.get('email').touched){
+              <p class="text-red-600 text-sm ml-0">Please Enter Valid Email</p>
+              }
+            </div>
+            <div class="form-group mb-3">
+              <label class="form-label" for="password">Password<span class="error-msg">*</span></label>
+              <input
+                formControlName="password"
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Password"
+              />
+              @if(signupForm.get('password').hasError('required') &&
+              signupForm.get('password').touched){
+              <p class="text-red-600 text-sm ml-0">Please Enter Password</p>
+              } @if(signupForm.get('password').hasError('pattern') &&
+              signupForm.get('password').touched){
+
+              <p class="text-red-600 text-sm ml-0">
+                Please Enter valid Password
+              </p>
+              }
+            </div>
+            <p class="mt-4 text-sm text-muted">
+              By Signing up, you agree to our
+              <a href="javascript:" class="text-primary">Terms of Service</a>
+              and
+              <a href="javascript:" class="text-primary">Privacy Policy</a>
+            </p>
+            <div class="d-grid mt-3">
+              @if (signupForm.valid) {<button
+                (click)="onSubmit()"
+                type="button"
+                class="btn btn-primary"
+              >
+                Create Account</button
+              >} @else {<button
+                disabled
+                (click)="onSubmit()"
+                type="button"
+                class="btn btn-primary"
+              >
+                Create Account</button
+              >}
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="auth-footer row">
+        <!-- <div class=""> -->
+        <div class="col my-1">
+          <p class="m-0">
+            Copyright ©
+            <!-- <a href="https://codedthemes.com/" target="_blank">CodedThemes</a> -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
