@@ -97,6 +97,18 @@
                 </div>
               </div>
             </div>
+            <!-- <div class="w-full"> -->
+            <!-- <div class="form-group mb-1"> -->
+            <app-em-input
+              formcontrolname="userAddress"
+              inputLabel="Street Address*"
+              inputPlaceholder="Enter Your Address"
+              inputId="address"
+              inputClass=""
+            ></app-em-input>
+            <!-- </div> -->
+            <!-- </div> -->
+
             <div class="form-group mb-3">
               <label class="form-label" for="emailAddress"
                 >Street Address<span class="requiredField">*</span></label
@@ -105,9 +117,8 @@
                 formControlName="userAddress"
                 type="text"
                 class="form-control"
-                id="emailAddress"
+                id="address"
                 placeholder="street Address"
-                value="{{ address }}"
               />
               @if (updateForm.get('userAddress').hasError('required') &&
               updateForm.get('userAddress').touched) {
@@ -184,8 +195,8 @@
                     <option [value]="item?.city_name">
                       {{ item?.city_name }}
                     </option>
-                    }
-                  </select>@if (updateForm.get('userCity').hasError('required') &&
+                    }</select
+                  >@if (updateForm.get('userCity').hasError('required') &&
                   updateForm.get('userCity').touched) {
                   <span class="text-red-700 text-sm ml-2"
                     >Please Select City</span

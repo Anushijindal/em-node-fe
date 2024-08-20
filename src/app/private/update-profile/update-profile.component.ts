@@ -8,11 +8,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { EmInputComponent } from "../../common/components/UI/form-elements/em-input/em-input.component";
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-update-profile',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, EmInputComponent,MatInputModule],
   templateUrl: './update-profile.component.html',
   styleUrl: './update-profile.component.css',
 })
