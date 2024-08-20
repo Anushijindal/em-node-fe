@@ -80,7 +80,7 @@ export class LoginComponent {
           this.storage.saveProfileToken(response.jwt);
           // localStorage.setItem('profileToken', response.jwt);
           this.toastr.success('Logged in successfully');
-          this.router.navigateByUrl("/")
+          this.router.navigateByUrl("my-profile")
           // this.data = data;
         },
         error: (err) => {
