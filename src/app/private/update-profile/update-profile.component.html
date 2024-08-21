@@ -10,7 +10,7 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label class="form-label" for="firstName"
                     >First Name<span class="requiredField">*</span></label
                   >
@@ -20,7 +20,6 @@
                     class="form-control"
                     id="firstName"
                     placeholder="First Name"
-                    value="{{ firstname }}"
                   />
                   @if (updateForm.get('userFirstName').hasError('required') &&
                   updateForm.get('userFirstName').touched) {
@@ -28,10 +27,20 @@
                     >Please enter First Name</span
                   >
                   }
-                </div>
+                </div> -->
+                <app-em-input
+                  inputType="text"
+                  formControlName="userFirstName"
+                  inputPlaceholder="Enter firstName"
+                  [formName]="updateForm"
+                  controlName="userFirstName"
+                  inputLabel="First Name"
+                  inputId="firstName"
+                  inputClass=""
+                ></app-em-input>
               </div>
               <div class="col-md-6">
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label class="form-label" for="lastName"
                     >Last Name<span class="requiredField">*</span></label
                   >
@@ -41,7 +50,6 @@
                     class="form-control"
                     id="lastName"
                     placeholder="Last Name"
-                    value="{{ lastname }}"
                   />
                   @if (updateForm.get('userLastName').hasError('required') &&
                   updateForm.get('userLastName').touched) {
@@ -49,19 +57,28 @@
                     >Please enter last Name</span
                   >
                   }
-                </div>
+                </div> -->
+                <app-em-input
+                  inputPlaceholder="Enter lastName"
+                  formControlName="userLastName"
+                  controlName="userLastName"
+                  inputLabel="Last Name"
+                  inputType="text"
+                  [formName]="updateForm"
+                  inputId="lastName"
+                  inputClass=""
+                ></app-em-input>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <div class="form-group mb-3">
-                  <label class="form-label" for="company"
+                <!-- <div class="form-group mb-3">
+                  <label class="form-label" for="gender"
                     >Gender<span class="requiredField">*</span></label
                   >
                   <select
                     formControlName="userGender"
                     class="form-control"
-                    name="gender"
                     id="gender"
                   >
                     @for (item of genderOptions; track $index) {
@@ -73,18 +90,26 @@
                   @if (updateForm.get('userGender').invalid) {
                   <span>Choose please</span>
                   }
-                </div>
+                </div> -->
+                <app-em-select
+                  formControlName="userGender"
+                  selectLabel="Choose Gender"
+                  selectClass="gender"
+                  selectId="gender"
+                  [items]="genderOptions"
+                ></app-em-select>
               </div>
               <div class="col-md-6">
-                <div class="form-group mb-3">
-                  <label class="form-label" for="company"
+                <!-- <div class="form-group mb-3">
+                  <label class="form-label" for="phone"
                     >Phone Number<span class="requiredField">*</span></label
                   >
                   <input
                     formControlName="userPhone"
+                    formName="updateForm"
                     type="number"
                     class="form-control"
-                    id="company"
+                    id="phone"
                     placeholder="Phone Number"
                     value="{{ phone }}"
                   />
@@ -94,22 +119,30 @@
                     >Please enter Phone Number</span
                   >
                   }
-                </div>
+                </div> -->
+                <app-em-input
+                  inputType="number"
+                  formControlName="userPhone"
+                  [formName]="updateForm"
+                  inputPlaceholder="Enter Phone Number"
+                  inputLabel="Phone Number"
+                  controlName="userPhone"
+                  inputId="phone"
+                  inputClass=""
+                ></app-em-input>
               </div>
             </div>
-            <!-- <div class="w-full"> -->
-            <!-- <div class="form-group mb-1"> -->
             <app-em-input
-              formcontrolname="userAddress"
-              inputLabel="Street Address*"
+              formControlName="userAddress"
+              inputLabel="Street Address"
               inputPlaceholder="Enter Your Address"
               inputId="address"
+              controlName="userAddress"
+              [formName]="updateForm"
               inputClass=""
+              inputType="text"
             ></app-em-input>
-            <!-- </div> -->
-            <!-- </div> -->
-
-            <div class="form-group mb-3">
+            <!-- <div class="form-group mb-3">
               <label class="form-label" for="emailAddress"
                 >Street Address<span class="requiredField">*</span></label
               >
@@ -126,10 +159,10 @@
                 >Please enter Your Address</span
               >
               }
-            </div>
+            </div> -->
             <div class="row">
               <div class="col-md-4">
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label class="form-label" for="country"
                     >Choose Country<span class="requiredField">*</span></label
                   >
@@ -140,20 +173,26 @@
                     id="country"
                     (change)="ChangeCountryData($event)"
                   >
-                    <option value="select">Select</option>
                     @for (item of countryData; track $index) {
-                    <!-- @if (item.country_name) {
-                        <option selected value="select">select</option>
-                      } -->
                     <option [value]="item?.country_name">
                       {{ item?.country_name }}
                     </option>
                     }
                   </select>
-                </div>
+                </div> -->
+                <app-em-select
+                  selectLabel="Choose Country"
+                  selectClass="country"
+                  selectId="country"
+                  [items]="countryData"
+                  formControlName="userCountry"
+                  controlName="userCountry"
+                  [formName]="updateForm"
+                  (valueChange)="ChangeCountryData($event)"
+                ></app-em-select>
               </div>
               <div class="col-md-4">
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label class="form-label" for="state"
                     >Choose State<span class="requiredField">*</span></label
                   >
@@ -170,16 +209,28 @@
                       {{ item?.state_name }}
                     </option>
                     }</select
-                  >@if (updateForm.get('userState').hasError('required') &&
+                  >
+                </div> -->
+                <app-em-select
+                  selectLabel="Choose State"
+                  selectClass="state"
+                  val="state_name"
+                  formControlName="userState"
+                  selectId="state"
+                  controlName="userState"
+                  [formName]="updateForm"
+                  (valueChange)="ChangeStateData($event)"
+                  [items]="stateData"
+                ></app-em-select>
+              </div>
+              <!-- @if (updateForm.get('userState').hasError('required') &&
                   updateForm.get('userState').touched) {
                   <span class="text-red-700 text-sm ml-2"
                     >Please Select State</span
                   >
-                  }
-                </div>
-              </div>
+                  } -->
               <div class="col-md-4">
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label class="form-label" for="city"
                     >Choose City<span class="requiredField">*</span></label
                   >
@@ -196,26 +247,35 @@
                       {{ item?.city_name }}
                     </option>
                     }</select
-                  >@if (updateForm.get('userCity').hasError('required') &&
+                  >
+                </div> -->
+                <app-em-select
+                  selectLabel="Choose City"
+                  selectClass="city"
+                  controlName="userCity"
+                  [formName]="updateForm"
+                  formControlName="userCity"
+                  selectId="city"
+                  [items]="cityData"
+                ></app-em-select>
+              </div>
+              <!-- @if (updateForm.get('userCity').hasError('required') &&
                   updateForm.get('userCity').touched) {
                   <span class="text-red-700 text-sm ml-2"
                     >Please Select City</span
                   >
-                  }
-                </div>
-              </div>
+                  } -->
             </div>
-            <div class="d-grid mt-3">
+            <app-em-button (click)="onUpdate()" class=""></app-em-button>
+            <!-- <div class="d-grid mt-3">
               <button
-                (click)="onUpdate()"
+                
                 type="button"
                 class="btn btn-primary"
               >
                 Submit
               </button>
-              <!-- <button mat-flat-button>Basic</button>
-              <button mat-raised-button>Basic</button> -->
-            </div>
+            </div> -->
           </form>
         </div>
       </div>

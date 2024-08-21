@@ -8,15 +8,24 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { EmInputComponent } from "../../common/components/UI/form-elements/em-input/em-input.component";
+import { EmInputComponent } from '../../common/components/ui/form-elements/em-input/em-input.component';
 import { MatInputModule } from '@angular/material/input';
-
+import { EmSelectComponent } from '../../common/components/ui/form-elements/em-select/em-select.component';
+import { EmButtonComponent } from '../../common/components/ui/form-elements/em-button/em-button.component';
+import { MatSelectChange } from '@angular/material/select';
 @Component({
   selector: 'app-update-profile',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, EmInputComponent,MatInputModule],
+  imports: [
+    RouterLink,
+    ReactiveFormsModule,
+    EmInputComponent,
+    MatInputModule,
+    EmSelectComponent,
+    EmButtonComponent,
+  ],
   templateUrl: './update-profile.component.html',
-  styleUrl: './update-profile.component.css',
+  styleUrl: './update-profile.component.scss',
 })
 export class UpdateProfileComponent {
   firstname: string = '';
@@ -43,23 +52,23 @@ export class UpdateProfileComponent {
     this.updateForm = this.formBuilder.group({
       userFirstName: ['', Validators.required],
       userLastName: ['', Validators.required],
-      userCountry: '',
+      userCountry: ['', Validators.required],
       userState: ['', Validators.required],
       userCity: ['', Validators.required],
-      userPhone: ['', Validators.required],
-      userGender: ['select', [this.selectGender]],
+      userPhone: ['', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      userGender: [''],
       userAddress: ['', Validators.required],
     });
     await this.getUserData();
   }
-  selectGender(formGroup: FormGroup) {
-    const gender = formGroup.get('userGender')?.value;
-    if (gender == 'select') {
-      return { invalidChoice: true };
-    } else {
-      return null;
-    }
-  }
+  // selectGender(formGroup: FormGroup) {
+  //   const gender = formGroup.get('userGender')?.value;
+  //   if (gender == 'select') {
+  //     return { invalidChoice: true };
+  //   } else {
+  //     return null;
+  //   }
+  // }
   getUserData() {
     this.httpService.myProfile().subscribe({
       next: (response: any) => {
@@ -119,16 +128,17 @@ export class UpdateProfileComponent {
         console.log(response);
         this.countryData = response.data;
 
-        // console.log(this.countryData);
+        console.log(this.countryData);
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
-  ChangeCountryData(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    const country = selectElement?.value || '';
+  ChangeCountryData(event: MatSelectChange) {
+    const selectElement = event ;
+    console.log(selectElement)
+    const country = selectElement ;
     console.log(country, 'asmndjhasdmjhasd&&');
     const stateData = {
       user_country: country,
@@ -140,9 +150,9 @@ export class UpdateProfileComponent {
         this.stateData = response.data;
         this.cityData = [];
         this.updateForm.patchValue({
-          userState:"",
-          userCity:""
-        })
+          userState: '',
+          userCity: '',
+        });
       },
       error: (err) => {
         console.log(err);
@@ -150,9 +160,9 @@ export class UpdateProfileComponent {
     });
   }
 
-  ChangeStateData(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    const state = selectElement?.value || '';
+  ChangeStateData(event: MatSelectChange) {
+    const selectElement = event;
+    const state = selectElement;
     console.log(state, 'asmndjhasdmjhasd&&');
 
     const cityData = {
@@ -163,6 +173,9 @@ export class UpdateProfileComponent {
       next: (response: any) => {
         console.log(response);
         this.cityData = response.data;
+        this.updateForm.patchValue({
+          userCity: '',
+        });
         // this.updateForm.patchValue()
       },
       error: (err) => {
