@@ -6,11 +6,11 @@ import { PrivateComponent } from '../private.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { StorageService } from '../../services/storage.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { ButtonComponent } from '../../common/components/ui/ui-elements/button/button.component';
 @Component({
   selector: 'app-my-profile',
   standalone: true,
-  imports: [SidebarComponent, PrivateComponent, RouterLink],
+  imports: [SidebarComponent, PrivateComponent, RouterLink,ButtonComponent],
   templateUrl: './my-profile.component.html',
   styleUrl: './my-profile.component.scss',
 })

@@ -1,34 +1,26 @@
-<div class="">
-  <div class="my-3">
-    <mat-form-field [style.margin]="'0px'" class="w-[100%] my-form-field">
-      <mat-label>{{ inputLabel }}<span class="text-red-600">*</span></mat-label>
-      <input
-        type="{{ inputType }}"
-        class="{{ inputClass }}"
-        id="{{ inputId }}"
-        [value]="value"
-        (input)="handleInputChange($event)"
-        [disabled]="disabled"
-        matInput
-        placeholder="{{ inputPlaceholder }}"
-      />
-    </mat-form-field>
-    @if (formName.get(controlName)?.hasError('required') &&
-    formName.get(controlName)?.touched) {
-    <span class="text-red-700 text-sm ml-2 mt-0"
-      >Please Enter {{ inputLabel }}</span
-    >
-    } @if (formName.get(controlName)?.hasError('pattern') &&
-    formName.get(controlName)?.touched) {
-    <span class="text-red-700 text-sm ml-2 mt-0"
-      >Please Enter Valid {{ inputLabel }}</span
-    >
-    } 
-    <!-- @if (formName.get(controlName)?.hasError('misMatch') && formName.get('confirm')?.touched ||
-    formName.get('password')?.touched ) {
-    <span class="text-red-600 text-sm ml-2"
-      >Please Enter Password Same As New Password</span
-    >
-    } -->
-  </div>
+<div class="my-3">
+  <mat-form-field [style.margin]="'0px'" class="w-[100%] my-form-field">
+    <mat-label>{{ inputLabel }}<span class="text-red-600">*</span></mat-label>
+    <input
+      type="{{ inputType }}"
+      class="{{ inputClass }}"
+      id="{{ inputId }}"
+      [value]="value"
+      (input)="handleInputChange($event)"
+      [disabled]="disabled"
+      matInput
+      placeholder="{{ inputPlaceholder }}"
+    />
+  </mat-form-field>
+  @if (formName.get(controlName)?.hasError('required') &&
+  formName.get(controlName)?.touched) {
+  <span class="text-red-700 text-sm ml-2 mt-0"
+    >Please Enter {{ inputLabel }}</span
+  >
+  } @if (formName.get(controlName)?.hasError('pattern') &&
+  formName.get(controlName)?.touched) {
+  <span class="text-red-700 text-sm ml-2 mt-0"
+    >Please Enter Valid {{ inputLabel }}</span
+  >
+  }
 </div>
