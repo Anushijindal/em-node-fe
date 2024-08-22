@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-my-profile',
   standalone: true,
-  imports: [SidebarComponent, PrivateComponent,RouterLink],
+  imports: [SidebarComponent, PrivateComponent, RouterLink],
   templateUrl: './my-profile.component.html',
   styleUrl: './my-profile.component.scss',
 })
@@ -25,21 +25,24 @@ export class MyProfileComponent implements OnInit {
   phone: string = '';
   address: string = '';
   image: string = '';
-  role:string=''
+  role: string = '';
   constructor(
     private httpService: httpService,
     private router: Router,
     private storage: StorageService,
-    private toster:ToastrService
-  ) {}
+    private toster: ToastrService
+  ) {
+    this.router.navigate(['/my-profile']);
+  }
   ngOnInit() {
+    // this.router.navigate(['/my-profile']);
     this.getUser();
   }
   getUser() {
     this.httpService.myProfile().subscribe({
       next: (response: any) => {
         if (response.status != 200) {
-          this.toster.error(response.message)
+          this.toster.error(response.message);
           this.storage.logout();
         } else {
           console.log(response.data);
@@ -50,7 +53,7 @@ export class MyProfileComponent implements OnInit {
           this.gender = response.data.userGender
             ? response.data.userGender
             : 'NA';
-            this.role=response.data.roleName;
+          this.role = response.data.roleName;
           this.address = response.data.userAddress
             ? response.data.userAddress
             : 'NA';

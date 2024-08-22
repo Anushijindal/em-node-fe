@@ -5,6 +5,7 @@ import {
   Input,
   Output,
   HostListener,
+  OnInit,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -71,12 +72,15 @@ import { UserServiceService } from '../../services/user-service.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   @Input() navCollapsed!: boolean;
   @Output() NavCollapse = new EventEmitter();
   @Output() NavCollapsedMob = new EventEmitter();
   windowWidth: number;
-  loggedUser: any;
+  user: any;
+  profileData: any;
+  userName:string='';
+  userRole:string='';
   constructor(
     private iconService: IconService,
     private route: Router,
@@ -108,18 +112,27 @@ export class HeaderComponent {
         WalletOutline,
       ]
     );
-    // this.user()
-    console.log(this.userService.loggedUser);
-    const data = this?.userService?.loggedUser;
-    console.log('huibw4tu', data?.source);
-    console.log(this.userService.userData());
-    this.userService.loggedUser.subscribe(
-      user=>console.log(user)
-      
-    );
-    console.log(this.loggedUser)
-    // console.log(userService.user)
   }
+  ngOnInit(): void {
+    this.userService.userData();
+    this.userService.loggedUser.subscribe({
+      next: (user) => {
+        this.user = user;
+        console.log('User data:', this.user);
+        if (this.user) {
+          this.handleUserData(this.user);
+        }
+      },
+      error: (err) => console.error('Error occurred:', err)
+    });
+  }
+  
+  handleUserData(user: any): void {
+    console.log('Handling user data:', user);
+    this.userName=user.userFirstName+ " "+ user.userLastName
+    this.userRole=user.roleName
+  }
+  
   profile = [
     {
       icon: 'edit',
@@ -160,15 +173,4 @@ export class HeaderComponent {
     // localStorage.removeItem("profileToken");
     this.route.navigate(['/login']);
   }
-  // user(){
-  //   console.log(this.userService?.loggedUser);
-  //   const data=this.userService?.userData();
-  //   console.log(data)
-  // }
-  // ngOnInit(){
-  //   this.userService.loggedUser.subscribe(
-  //     loggedUser=>this.loggedUser=loggedUser
-  //   );
-  //   console.log(this.loggedUser);
-  // }
 }

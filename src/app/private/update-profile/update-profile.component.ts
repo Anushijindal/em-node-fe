@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { EmSelectComponent } from '../../common/components/ui/form-elements/em-select/em-select.component';
 import { EmButtonComponent } from '../../common/components/ui/form-elements/em-button/em-button.component';
 import { MatSelectChange } from '@angular/material/select';
+import { UserServiceService } from '../../services/user-service.service';
 @Component({
   selector: 'app-update-profile',
   standalone: true,
@@ -42,11 +43,13 @@ export class UpdateProfileComponent {
   countryData: any = '';
   stateData: any;
   cityData: any;
+  // inputLabel:string="";
   constructor(
     private httpService: httpService,
     private formBuilder: FormBuilder,
     private toster: ToastrService,
-    private route: Router
+    private route: Router,
+    private userService: UserServiceService
   ) {}
   async ngOnInit() {
     this.updateForm = this.formBuilder.group({
@@ -196,6 +199,7 @@ export class UpdateProfileComponent {
         user_street_address: this.updateForm.value.userAddress,
         user_phone: this.updateForm.value.userPhone,
       };
+
       this.httpService.updateProfile(data).subscribe({
         next: (response: any) => {
           console.log(response);

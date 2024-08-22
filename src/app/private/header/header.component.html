@@ -76,7 +76,7 @@
                             <span class="float-end text-muted">3:00 AM</span>
                             <p class="text-body mb-0">
                               It's
-                              <b>Cristina danny's</b>
+                              <b>Cristina danny's </b>
                               birthday today.
                             </p>
                             <span class="text-muted">2 min ago</span>
@@ -141,7 +141,7 @@
             <li class="dropdown pc-h-item header-user-profile" ngbDropdown>
               <a class="pc-head-link dropdown-toggle arrow-none me-0 cursor-pointer " ngbDropdownToggle>
                 <img src="../../../../../../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avatar me-2" />
-                <span class="f-w-600">John Doe</span>
+                <span class="f-w-600">{{userName}}</span>
                 <!-- <h1>{{loggedUser}}</h1> -->
               </a>
               <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
@@ -151,8 +151,8 @@
                       <img src="../../../../../../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avatar wid-35" />
                     </div>
                     <div class="flex-grow-1 ms-3 text-start">
-                      <h6 class="mb-0">JWT User</h6>
-                      <span>UI/UX Designer</span>
+                      <h3 class="mb-0">{{userName}}</h3>
+                      <span>{{userRole}}</span>
                     </div>
                     <a href="javascript:" (click)="profileLogout()" class="bg-transparent cursor-pointer "><i class="d-flex f-20" antIcon theme="outline" type="logout"></i></a>
                   </div>
