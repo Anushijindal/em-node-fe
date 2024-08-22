@@ -3,11 +3,14 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink, } from '@angular/router';
 import { httpService } from '../../services/httpServices.service';
 import { ToastrService } from 'ngx-toastr';
+import { EmInputComponent } from '../../common/components/ui/form-elements/em-input/em-input.component';
+import { EmButtonComponent } from '../../common/components/ui/form-elements/em-button/em-button.component';
+import { EmDisabledButtonComponent } from '../../common/components/ui/form-elements/em-disabled-button/em-disabled-button.component';
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
-  imports: [RouterLink,ReactiveFormsModule],
+  imports: [RouterLink,ReactiveFormsModule,EmInputComponent,EmButtonComponent,EmDisabledButtonComponent],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.scss'
 })

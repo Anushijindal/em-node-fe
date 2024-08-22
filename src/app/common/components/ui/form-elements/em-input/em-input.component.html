@@ -23,6 +23,12 @@
     <span class="text-red-700 text-sm ml-2 mt-0"
       >Please Enter Valid {{ inputLabel }}</span
     >
-    }
+    } 
+    <!-- @if (formName.get(controlName)?.hasError('misMatch') && formName.get('confirm')?.touched ||
+    formName.get('password')?.touched ) {
+    <span class="text-red-600 text-sm ml-2"
+      >Please Enter Password Same As New Password</span
+    >
+    } -->
   </div>
 </div>

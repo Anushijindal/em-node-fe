@@ -25,6 +25,7 @@ export class MyProfileComponent implements OnInit {
   phone: string = '';
   address: string = '';
   image: string = '';
+  role:string=''
   constructor(
     private httpService: httpService,
     private router: Router,
@@ -49,6 +50,7 @@ export class MyProfileComponent implements OnInit {
           this.gender = response.data.userGender
             ? response.data.userGender
             : 'NA';
+            this.role=response.data.roleName;
           this.address = response.data.userAddress
             ? response.data.userAddress
             : 'NA';

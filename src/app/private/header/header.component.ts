@@ -67,7 +67,6 @@ import { UserServiceService } from '../../services/user-service.service';
     IconModule,
     NgClass,
     NgbNav,
-    
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -77,7 +76,13 @@ export class HeaderComponent {
   @Output() NavCollapse = new EventEmitter();
   @Output() NavCollapsedMob = new EventEmitter();
   windowWidth: number;
-  constructor(private iconService: IconService,private route:Router,private storage:StorageService,private userService:UserServiceService) {
+  loggedUser: any;
+  constructor(
+    private iconService: IconService,
+    private route: Router,
+    private storage: StorageService,
+    private userService: UserServiceService
+  ) {
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
       ...[
@@ -104,22 +109,27 @@ export class HeaderComponent {
       ]
     );
     // this.user()
-   console.log( this.userService.loggedUser);
-   const data=this?.userService?.userData();
-   console.log("huibw4tu",data)
-   console.log(this.userService.userData());
-   
+    console.log(this.userService.loggedUser);
+    const data = this?.userService?.loggedUser;
+    console.log('huibw4tu', data?.source);
+    console.log(this.userService.userData());
+    this.userService.loggedUser.subscribe(
+      user=>console.log(user)
+      
+    );
+    console.log(this.loggedUser)
+    // console.log(userService.user)
   }
   profile = [
     {
       icon: 'edit',
       title: 'Edit Profile',
-      url:"/my-profile/updateProfile"
+      url: '/my-profile/updateProfile',
     },
     {
       icon: 'user',
       title: 'View Profile',
-      url:"/my-profile"
+      url: '/my-profile',
     },
   ];
 
@@ -135,25 +145,30 @@ export class HeaderComponent {
     {
       icon: 'lock',
       title: 'Change Password',
-      url:"/my-profile/changePassword"
+      url: '/my-profile/changePassword',
     },
     {
       icon: 'comment',
       title: 'Feedback',
     },
-    
   ];
   navCollapse() {
     this.NavCollapse.emit();
   }
-  profileLogout(){
+  profileLogout() {
     this.storage.logout();
     // localStorage.removeItem("profileToken");
-    this.route.navigate(["/login"]);
+    this.route.navigate(['/login']);
   }
   // user(){
   //   console.log(this.userService?.loggedUser);
   //   const data=this.userService?.userData();
   //   console.log(data)
+  // }
+  // ngOnInit(){
+  //   this.userService.loggedUser.subscribe(
+  //     loggedUser=>this.loggedUser=loggedUser
+  //   );
+  //   console.log(this.loggedUser);
   // }
 }

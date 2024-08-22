@@ -55,20 +55,15 @@ export class UpdateProfileComponent {
       userCountry: ['', Validators.required],
       userState: ['', Validators.required],
       userCity: ['', Validators.required],
-      userPhone: ['', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      userPhone: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
       userGender: [''],
       userAddress: ['', Validators.required],
     });
     await this.getUserData();
   }
-  // selectGender(formGroup: FormGroup) {
-  //   const gender = formGroup.get('userGender')?.value;
-  //   if (gender == 'select') {
-  //     return { invalidChoice: true };
-  //   } else {
-  //     return null;
-  //   }
-  // }
   getUserData() {
     this.httpService.myProfile().subscribe({
       next: (response: any) => {
@@ -136,9 +131,9 @@ export class UpdateProfileComponent {
     });
   }
   ChangeCountryData(event: MatSelectChange) {
-    const selectElement = event ;
-    console.log(selectElement)
-    const country = selectElement ;
+    const selectElement = event;
+    console.log(selectElement);
+    const country = selectElement;
     console.log(country, 'asmndjhasdmjhasd&&');
     const stateData = {
       user_country: country,

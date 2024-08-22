@@ -5,10 +5,20 @@ import { HttpClient } from '@angular/common/http';
 import { httpService } from '../../services/httpServices.service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { EmButtonComponent } from '../../common/components/ui/form-elements/em-button/em-button.component';
+import { EmDisabledButtonComponent } from '../../common/components/ui/form-elements/em-disabled-button/em-disabled-button.component';
+import { EmInputComponent } from '../../common/components/ui/form-elements/em-input/em-input.component';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,RouterLink],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLink,
+    EmButtonComponent,
+    EmDisabledButtonComponent,
+    EmInputComponent,
+  ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
@@ -19,8 +29,8 @@ export class SignupComponent {
   constructor(
     public formBuilder: FormBuilder,
     private httpService: httpService,
-    private toastr:ToastrService,
-    private router:Router
+    private toastr: ToastrService,
+    private router: Router
   ) {}
   ngOnInit() {
     this.initializeForm();
@@ -68,12 +78,12 @@ export class SignupComponent {
       this.httpService.signupPost(data).subscribe({
         next: (response: any) => {
           console.log(response);
-          this.toastr.success("Signed up successfully")
-          this.router.navigateByUrl("/login")
+          this.toastr.success('Signed up successfully');
+          this.router.navigateByUrl('/login');
         },
         error: (err) => {
           console.log(err);
-          this.toastr.error(err.error.message)
+          this.toastr.error(err.error.message);
         },
       });
       // this.httpClient

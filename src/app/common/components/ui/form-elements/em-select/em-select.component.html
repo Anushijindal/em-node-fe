@@ -1,6 +1,6 @@
-<div class="">
-  <div class="my-3">
-    <mat-form-field>
+<div class="my-3">
+  <div class="">
+    <mat-form-field [style.width]="'100%'">
       <mat-label>{{ selectLabel }}</mat-label>
       <mat-select
         [value]="value"
@@ -23,13 +23,11 @@
         }
       </mat-select>
     </mat-form-field>
-    <!-- @if (formName.get(controlName)?.hasError('required') &&
-    formName.get(controlName)?.touched) {
-    <span class="text-red-700 text-sm ml-2">Please {{selectLabel}}</span>
-    } -->
   </div>
+  @if (formName.get(controlName)?.value=="" ) {
+  <span class="text-red-700 text-sm ml-2">Please {{ selectLabel }}</span>
+  }
   <!-- @if (formName1.get(controlName1)?.value=="") {
   <span class="text-red-700 text-sm ml-2 mt-0">Please {{ selectLabel }}</span>
   } -->
-  
 </div>

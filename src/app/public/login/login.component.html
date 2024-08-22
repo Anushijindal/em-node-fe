@@ -16,27 +16,39 @@
               >
             </div>
             <div class="form-group mb-3">
-              <label class="form-label" for="email">Email Address<span class="err-msg">*</span></label>
+              <!-- <label class="form-label" for="email"
+                >Email Address<span class="err-msg">*</span></label
+              >
               <input
                 formControlName="email"
                 type="email"
                 class="form-control"
                 id="email"
                 placeholder="Email Address"
-                value="info@codedthemes.com"
               />
               @if(loginForm.get('email').hasError('required') &&
               loginForm.get('email').touched){
               <p class="text-red-600 text-sm ml-0">Please Enter Email</p>
               } @if (loginForm.get('email').hasError('pattern') &&
               loginForm.get('email').touched) {
-              <p class="text-red-600 text-sm ml-0">
-                Please Enter Valid Email
-              </p>
-              }
+              <p class="text-red-600 text-sm ml-0">Please Enter Valid Email</p>
+              } -->
+              <app-em-input
+                formControlName="email"
+                inputType="email"
+                inputId="email"
+                [formName]="loginForm"
+                controlName="email"
+                inputPlaceholder="Enter Email Address"
+                inputLabel="Email Address"
+                inputClass=""
+              ></app-em-input>
             </div>
+
             <div class="form-group mb-3">
-              <label class="form-label" for="password">Password<span class="err-msg">*</span></label>
+              <!-- <label class="form-label" for="password"
+                >Password<span class="err-msg">*</span></label
+              >
               <input
                 formControlName="password"
                 type="password"
@@ -50,8 +62,20 @@
               <p class="text-red-600 text-sm p-0">Please Enter Password</p>
               } @if (loginForm.get('password').hasError('pattern') &&
               loginForm.get('password').touched) {
-              <p class="text-red-600 text-sm ml-0">Please Enter Valid Password</p>
-              }
+              <p class="text-red-600 text-sm ml-0">
+                Please Enter Valid Password
+              </p>
+              } -->
+              <app-em-input
+                formControlName="password"
+                inputType="password"
+                inputId="password"
+                [formName]="loginForm"
+                controlName="password"
+                inputPlaceholder="Enter Password"
+                inputLabel="Password"
+                inputClass=""
+              ></app-em-input>
             </div>
             <div class="d-flex mt-1 justify-content-between">
               <div class="form-check">
@@ -71,20 +95,24 @@
               </h5>
             </div>
             <div class="d-grid mt-4">
-              @if (loginForm.valid) {<button
+              @if (loginForm.valid) {
+              <!-- <button
                 (click)="onSubmit()"
                 type="button"
                 class="btn btn-primary"
               >
-                Login
-              </button>}
-              @else {<button disabled
+                Login</button
+              > -->
+              <app-em-button (click)="onSubmit()"></app-em-button>} @else {
+              <!-- <button
+                disabled
                 (click)="onSubmit()"
                 type="button"
                 class="btn btn-primary"
               >
-                Login
-              </button>}
+                Login</button
+              > -->
+              <app-em-disabled-button></app-em-disabled-button>}
             </div>
 
             <div class="row">
