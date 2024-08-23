@@ -141,7 +141,7 @@
             <li class="dropdown pc-h-item header-user-profile" ngbDropdown>
               <a class="pc-head-link dropdown-toggle arrow-none me-0 cursor-pointer " ngbDropdownToggle>
                 <img src="../../../../../../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avatar me-2" />
-                <span class="f-w-600">{{userName}}</span>
+                <span class="f-w-600">{{user.userFirstName}}</span>
                 <!-- <h1>{{loggedUser}}</h1> -->
               </a>
               <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
@@ -151,8 +151,8 @@
                       <img src="../../../../../../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avatar wid-35" />
                     </div>
                     <div class="flex-grow-1 ms-3 text-start">
-                      <h3 class="mb-0">{{userName}}</h3>
-                      <span>{{userRole}}</span>
+                      <h3 class="mb-0">{{user.userFirstName+" "+user.userLastName}}</h3>
+                      <span>{{user.roleName}}</span>
                     </div>
                     <a href="javascript:" (click)="profileLogout()" class="bg-transparent cursor-pointer "><i class="d-flex f-20" antIcon theme="outline" type="logout"></i></a>
                   </div>

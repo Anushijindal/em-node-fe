@@ -16,18 +16,6 @@ export const routes: Routes = [
         path:"signup",
         component:SignupComponent, canActivate: [publicGuard]
     },
-    // {
-    //     path:"header",
-    //     component:HeaderComponent
-    // },
-    // {
-    //     path:"sidebar",
-    //     component:SidebarComponent
-    // },
-    // {
-    //     path:"dashboard",
-    //     component:DashboardComponent
-    // },
     {
         path: '',
         loadChildren: () =>

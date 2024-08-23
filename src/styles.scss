@@ -19,7 +19,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import 'tailwindcss/utilities';
 
 // @import 'scss/style';
-
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-quartz.css';
 @import "ngx-toastr/toastr";
 // main framework
 @import '../node_modules/bootstrap/scss/functions';

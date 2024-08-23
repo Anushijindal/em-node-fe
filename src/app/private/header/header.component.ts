@@ -118,21 +118,10 @@ export class HeaderComponent implements OnInit {
     this.userService.loggedUser.subscribe({
       next: (user) => {
         this.user = user;
-        console.log('User data:', this.user);
-        if (this.user) {
-          this.handleUserData(this.user);
-        }
       },
       error: (err) => console.error('Error occurred:', err)
     });
-  }
-  
-  handleUserData(user: any): void {
-    console.log('Handling user data:', user);
-    this.userName=user.userFirstName+ " "+ user.userLastName
-    this.userRole=user.roleName
-  }
-  
+  }  
   profile = [
     {
       icon: 'edit',

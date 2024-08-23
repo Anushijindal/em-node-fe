@@ -12,8 +12,7 @@
       placeholder="{{ inputPlaceholder }}"
     />
   </mat-form-field>
-  @if (formName.get(controlName)?.hasError('required') &&
-  formName.get(controlName)?.touched) {
+  @if (formName.get(controlName)?.hasError('required') && formName.get(controlName)?.touched ) {
   <span class="text-red-700 text-sm ml-2 mt-0"
     >Please Enter {{ inputLabel }}</span
   >

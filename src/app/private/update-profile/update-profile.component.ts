@@ -199,7 +199,7 @@ export class UpdateProfileComponent {
         user_street_address: this.updateForm.value.userAddress,
         user_phone: this.updateForm.value.userPhone,
       };
-
+      // this.userService.user.
       this.httpService.updateProfile(data).subscribe({
         next: (response: any) => {
           console.log(response);

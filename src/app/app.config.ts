@@ -6,6 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { httpRequest } from './interceptor/httpRequest.interceptor';
+// import { AgGridAngular } from '@ag-grid-community/angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),provideToastr(), provideAnimationsAsync(),provideHttpClient(
