@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
+import { AgGridAngular, ICellRendererAngularComp } from 'ag-grid-angular'; // Angular Data Grid Component
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {
   ColDef,
@@ -10,6 +10,7 @@ import {
   ModuleRegistry,
   createGrid,
 } from 'ag-grid-community'; // Column Definition Type Interface
+// import {ICellRendererParams} from "ag-grid-angular"
 import { ClientSideRowModelModule } from 'ag-grid-community';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 import { IOlympicData } from './interfaces';
@@ -18,21 +19,37 @@ import { IOlympicData } from './interfaces';
   standalone: true,
   imports: [AgGridAngular, HttpClientModule],
   // templateUrl: './em-table.component.html',
-  template: `<ag-grid-angular
-    style="width: 100%; height: 500px; margin-top: 100px;"
-    [columnDefs]="columnDefs"
-    [defaultColDef]="defaultColDef"
-    [suppressRowClickSelection]="true"
-    [groupSelectsChildren]="true"
-    [rowSelection]="rowSelection"
-    [pagination]="true"
-    [rowData]="rowData"
-    [class]="themeClass"
-    (gridReady)="onGridReady($event)"
-  /> `,
+  template: `
+    <h1>Users Table</h1>
+    <input
+      type="text"
+      id="filter-text-box"
+      placeholder="Filter..."
+      (input)="onFilterTextBoxChanged()"
+    />
+    <button (click)="handleClick()" >Click Me</button>
+    <ag-grid-angular
+      style="width: 100%; height: 700px; "
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [suppressRowClickSelection]="true"
+      [groupSelectsChildren]="true"
+      [rowSelection]="rowSelection"
+      [pagination]="pagination"
+      [paginationPageSize]=20
+      [paginationPageSizeSelector]='paginationPageSizeSelector'
+      [rowData]="rowData?.data"
+      [class]="themeClass"
+      (gridReady)="onGridReady($event)"
+    />
+  `,
   styleUrl: './em-table.component.scss',
 })
 export class EmTableComponent {
+  private gridApi!: GridApi;
+  public rowHeight = 60;
+  public pagination=true
+  public paginationPageSizeSelector=[20,30,40]
   // rowData = [
   //   { make: 'Tesla', model: 'Model Y', price: 64950, electric: true },
   //   { make: 'Ford', model: 'F-Series', price: 33850, electric: false },
@@ -48,40 +65,51 @@ export class EmTableComponent {
   // ];
   public columnDefs: ColDef[] = [
     {
-      field: 'athlete',
-      // headerName:'abc'
+      field: 'user_first_name',
+      headerName: 'firstName',
+      sortable: true,
       // minWidth: 170,
       // checkboxSelection: true,
       // headerCheckboxSelection: true,
     },
-    { field: 'age' },
-    { field: 'country' },
-    { field: 'year' },
-    { field: 'date' },
-    { field: 'sport' },
-    { field: 'gold' },
-    { field: 'silver' },
-    { field: 'bronze' },
-    { field: 'total' },
+    { field: 'user_last_name', headerName: 'lastName',floatingFilter:true },
+    { field: 'user_email', headerName: 'email' },
+    { field: 'user_phone', headerName: 'Phone Number' },
+    { field: 'user_gender', headerName: 'Gender' },
+    // { field: 'sport' },
+    // { field: 'gold' },
+    // { field: 'silver' },
+    // { field: 'bronze' },
+    // { field: 'total' },
   ];
+  handleClick(){
+    alert("I am clicked");
+  }
+  onFilterTextBoxChanged() {
+    this.gridApi.setGridOption(
+      'quickFilterText',
+      (document.getElementById('filter-text-box') as HTMLInputElement).value
+    );
+  }
+  // onGridReady(params: GridReadyEvent) {
+
   public defaultColDef: ColDef = {
     editable: false,
     filter: true,
     flex: 1,
-    
+    sortable: false,
     minWidth: 100,
   };
   public rowSelection: 'single' | 'multiple' = 'multiple';
-  public rowData!: IOlympicData[];
+  public rowData!: any;
   public themeClass: string = 'ag-theme-quartz';
 
   constructor(private http: HttpClient) {}
 
   onGridReady(params: GridReadyEvent<IOlympicData>) {
+    this.gridApi = params.api;
     this.http
-      .get<IOlympicData[]>(
-        'https://www.ag-grid.com/example-assets/olympic-winners.json'
-      )
+      .get('http://localhost/employees_management/api/v1/users/')
       .subscribe((data) => (this.rowData = data));
   }
 }

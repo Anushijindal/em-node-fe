@@ -47,7 +47,12 @@ import {
   GithubOutline,
 } from '@ant-design/icons-angular/icons';
 import { StorageService } from '../../services/storage.service';
-import { UserServiceService } from '../../services/user-service.service';
+import { UserService } from '../../services/user-service.service';
+interface userProfileData{
+  firstName:string;
+  lastName:string;
+  userRole:string;
+}
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -77,15 +82,12 @@ export class HeaderComponent implements OnInit {
   @Output() NavCollapse = new EventEmitter();
   @Output() NavCollapsedMob = new EventEmitter();
   windowWidth: number;
-  user: any;
-  profileData: any;
-  userName:string='';
-  userRole:string='';
+  userProfile!: userProfileData;
   constructor(
     private iconService: IconService,
     private route: Router,
     private storage: StorageService,
-    private userService: UserServiceService
+    private userService: UserService
   ) {
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
@@ -114,10 +116,10 @@ export class HeaderComponent implements OnInit {
     );
   }
   ngOnInit(): void {
-    this.userService.userData();
-    this.userService.loggedUser.subscribe({
-      next: (user) => {
-        this.user = user;
+    //this.userService.userData();
+    this.userService.userProfileObservable.subscribe({
+      next: (userProfile) => {
+        this.userProfile = userProfile;
       },
       error: (err) => console.error('Error occurred:', err)
     });

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 // import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -7,40 +12,33 @@ import { httpService } from '../../services/httpServices.service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from '../../services/storage.service';
-import { EmInputComponent } from '../../common/components/ui/form-elements/em-input/em-input.component';
-import { EmButtonComponent } from "../../common/components/ui/form-elements/em-button/em-button.component";
+import { EmInputComponent } from '../../common/components/ui/form-elements/em-input-box/em-input-box.component';
+import { EmButtonComponent } from '../../common/components/ui/form-elements/em-button/em-button.component';
 import { EmDisabledButtonComponent } from '../../common/components/ui/form-elements/em-disabled-button/em-disabled-button.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, EmInputComponent, EmButtonComponent,EmDisabledButtonComponent],
-  providers: [
-    // {
-    //   provide:ToastrService,useClass:ToastrService
-    // },
-    // {
-    //   provide:ToastNoAnimation,useClass:ToastNoAnimation
-    // }
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLink,
+    EmInputComponent,
+    EmButtonComponent,
+    EmDisabledButtonComponent,
   ],
+  providers: [],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  // httpClient = inject(HttpClient);
-  // public data: Array<any> = [];
-  loginForm: any;
-
-  // isFormVisible:boolean=true;
-  // items:string[]=["item1","item2","item3","item4"];
-  // role:number=10;
+  loginForm: FormGroup;
   constructor(
     public formBuilder: FormBuilder,
     private httpService: httpService,
     private toastr: ToastrService,
-    private router:Router,
-    private storage:StorageService
-  ) {}
-  ngOnInit() {
+    private router: Router,
+    private storage: StorageService
+  ) {
     this.loginForm = this.formBuilder.group({
       email: [
         '',
@@ -63,9 +61,9 @@ export class LoginComponent {
       check: [''],
     });
   }
+  ngOnInit() {}
   onSubmit() {
-    if(this.loginForm.valid){
-
+    if (this.loginForm.valid) {
       console.log('Form submitted:', this.loginForm.value);
       const data = {
         email: this.loginForm.value.email,
@@ -73,7 +71,6 @@ export class LoginComponent {
       };
       this.httpService.loginPost(data).subscribe({
         next: (response: any) => {
-          // console.log(response);
           if (response.status == 401) {
             console.log(response.message);
             this.toastr.error(response.message);
@@ -81,14 +78,12 @@ export class LoginComponent {
           }
           console.log(response);
           this.storage.saveProfileToken(response.jwt);
-          // localStorage.setItem('profileToken', response.jwt);
-          this.toastr.success('Logged in successfully');
-          this.router.navigateByUrl("my-profile")
-          // this.data = data;
+          this.toastr.success(response.message);
+          this.router.navigateByUrl('my-profile');
         },
         error: (err) => {
           console.log(err);
-          this.toastr.error(err.error.message)
+          this.toastr.error(err.error.message);
         },
       });
     }

@@ -3,10 +3,10 @@ import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule
 import { MatInputModule } from '@angular/material/input';
  
 @Component({
-  selector: 'app-em-input',
+  selector: 'em-input-box',
   standalone: true,
-  templateUrl: './em-input.component.html',
-  styleUrls: ['./em-input.component.scss'],
+  templateUrl: './em-input-box.component.html',
+  styleUrls: ['./em-input-box.component.scss'],
   imports: [MatInputModule,ReactiveFormsModule],
   encapsulation:ViewEncapsulation.None,
   providers: [

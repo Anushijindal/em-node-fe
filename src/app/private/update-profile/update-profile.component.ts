@@ -8,12 +8,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { EmInputComponent } from '../../common/components/ui/form-elements/em-input/em-input.component';
+import { EmInputComponent } from '../../common/components/ui/form-elements/em-input-box/em-input-box.component';
 import { MatInputModule } from '@angular/material/input';
-import { EmSelectComponent } from '../../common/components/ui/form-elements/em-select/em-select.component';
+import { EmSelectComponent } from '../../common/components/ui/form-elements/em-select-box/em-select-box.component';
 import { EmButtonComponent } from '../../common/components/ui/form-elements/em-button/em-button.component';
 import { MatSelectChange } from '@angular/material/select';
-import { UserServiceService } from '../../services/user-service.service';
+import { UserService } from '../../services/user-service.service';
 @Component({
   selector: 'app-update-profile',
   standalone: true,
@@ -29,29 +29,18 @@ import { UserServiceService } from '../../services/user-service.service';
   styleUrl: './update-profile.component.scss',
 })
 export class UpdateProfileComponent {
-  firstname: string = '';
-  lastname: string = '';
-  phone: string = '';
-  gender: string = '';
-  country: string = '';
-  state: string = '';
-  city: string = '';
-  address: string = '';
-  updateForm: any;
-  selectedGender: string = '';
-  selectedCountry: string = '';
-  countryData: any = '';
-  stateData: any;
-  cityData: any;
-  // inputLabel:string="";
+  updateForm: FormGroup;
+  countryData: []=[];
+  stateData: []=[];
+  cityData: []=[];
+  userRole: string = '';
   constructor(
     private httpService: httpService,
     private formBuilder: FormBuilder,
     private toster: ToastrService,
     private route: Router,
-    private userService: UserServiceService
-  ) {}
-  async ngOnInit() {
+    private userService: UserService
+  ) {
     this.updateForm = this.formBuilder.group({
       userFirstName: ['', Validators.required],
       userLastName: ['', Validators.required],
@@ -65,15 +54,15 @@ export class UpdateProfileComponent {
       userGender: [''],
       userAddress: ['', Validators.required],
     });
+  }
+  async ngOnInit() {
     await this.getUserData();
   }
   getUserData() {
     this.httpService.myProfile().subscribe({
       next: (response: any) => {
         console.log(response.data);
-        this.country = response.data.userCountry;
-        console.log(this.country);
-
+        this.userRole = response.data.userRoleName;
         this.updateForm.patchValue({
           userFirstName: response?.data?.userFirstName,
           userGender: response.data.userGender,
@@ -181,12 +170,6 @@ export class UpdateProfileComponent {
       },
     });
   }
-
-  Data(event: HTMLSelectElement) {
-    const selectedCountry = event.value;
-    console.log('Selected country:', selectedCountry);
-    // Add your logic here based on the selected country
-  }
   onUpdate() {
     if (this.updateForm.valid) {
       const data = {
@@ -203,6 +186,11 @@ export class UpdateProfileComponent {
       this.httpService.updateProfile(data).subscribe({
         next: (response: any) => {
           console.log(response);
+          this.userService.setProfile({
+            firstName: this.updateForm.value.userFirstName || '',
+            lastName: this.updateForm.value.userLastName || '',
+            userRole: this.userRole || '',
+          });
           this.toster.success(response.message);
           this.route.navigateByUrl('/my-profile');
         },

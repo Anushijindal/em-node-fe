@@ -17,8 +17,12 @@ export const routes: Routes = [
           import('./my-profile/my-profile.routes').then((m) => m.routes),
       },
       {
-        path: 'dashboard',
+        path: 'user-list',
         component: EmTableComponent,
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
       },
     ],
   },

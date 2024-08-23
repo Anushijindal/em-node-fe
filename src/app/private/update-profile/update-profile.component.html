@@ -28,7 +28,7 @@
                   >
                   }
                 </div> -->
-                <app-em-input
+                <em-input-box
                   inputType="text"
                   formControlName="userFirstName"
                   inputPlaceholder="Enter firstName"
@@ -37,7 +37,7 @@
                   inputLabel="First Name"
                   inputId="firstName"
                   inputClass=""
-                ></app-em-input>
+                ></em-input-box>
               </div>
               <div class="col-md-6">
                 <!-- <div class="form-group mb-3">
@@ -58,7 +58,7 @@
                   >
                   }
                 </div> -->
-                <app-em-input
+                <em-input-box
                   inputPlaceholder="Enter lastName"
                   formControlName="userLastName"
                   controlName="userLastName"
@@ -67,7 +67,7 @@
                   [formName]="updateForm"
                   inputId="lastName"
                   inputClass=""
-                ></app-em-input>
+                ></em-input-box>
               </div>
             </div>
             <div class="row">
@@ -91,7 +91,7 @@
                   <span>Choose please</span>
                   }
                 </div> -->
-                <app-em-select
+                <em-select-box
                   formControlName="userGender"
                   selectLabel="Choose Gender"
                   selectClass="gender"
@@ -99,7 +99,7 @@
                   controlName="gender"
                   [formName]="updateForm"
                   [items]="genderOptions"
-                ></app-em-select>
+                ></em-select-box>
               </div>
               <div class="col-md-6">
                 <!-- <div class="form-group mb-3">
@@ -122,7 +122,7 @@
                   >
                   }
                 </div> -->
-                <app-em-input
+                <em-input-box
                   inputType="number"
                   formControlName="userPhone"
                   [formName]="updateForm"
@@ -131,10 +131,10 @@
                   controlName="userPhone"
                   inputId="phone"
                   inputClass=""
-                ></app-em-input>
+                ></em-input-box>
               </div>
             </div>
-            <app-em-input
+            <em-input-box
               formControlName="userAddress"
               inputLabel="Street Address"
               inputPlaceholder="Enter Your Address"
@@ -143,7 +143,7 @@
               [formName]="updateForm"
               inputClass=""
               inputType="text"
-            ></app-em-input>
+            ></em-input-box>
             <!-- <div class="form-group mb-3">
               <label class="form-label" for="emailAddress"
                 >Street Address<span class="requiredField">*</span></label
@@ -182,7 +182,7 @@
                     }
                   </select>
                 </div> -->
-                <app-em-select
+                <em-select-box
                   selectLabel="Choose Country"
                   selectClass="country"
                   selectId="country"
@@ -191,7 +191,7 @@
                   controlName="userCountry"
                   [formName]="updateForm"
                   (valueChange)="ChangeCountryData($event)"
-                ></app-em-select>
+                ></em-select-box>
               </div>
               <div class="col-md-4">
                 <!-- <div class="form-group mb-3">
@@ -213,7 +213,7 @@
                     }</select
                   >
                 </div> -->
-                <app-em-select
+                <em-select-box
                   selectLabel="Choose State"
                   selectClass="state"
                   val="state_name"
@@ -223,7 +223,7 @@
                   [formName]="updateForm"
                   (valueChange)="ChangeStateData($event)"
                   [items]="stateData"
-                ></app-em-select>
+                ></em-select-box>
               </div>
               <!-- @if (updateForm.get('userState').hasError('required') &&
                   updateForm.get('userState').touched) {
@@ -251,7 +251,7 @@
                     }</select
                   >
                 </div> -->
-                <app-em-select
+                <em-select-box
                   selectLabel="Choose City"
                   selectClass="city"
                   controlName="userCity"
@@ -259,7 +259,7 @@
                   formControlName="userCity"
                   selectId="city"
                   [items]="cityData"
-                ></app-em-select>
+                ></em-select-box>
               </div>
               <!-- @if (updateForm.get('userCity').hasError('required') &&
                   updateForm.get('userCity').touched) {

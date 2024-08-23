@@ -10,7 +10,7 @@ import { ButtonComponent } from '../../common/components/ui/ui-elements/button/b
 @Component({
   selector: 'app-my-profile',
   standalone: true,
-  imports: [SidebarComponent, PrivateComponent, RouterLink,ButtonComponent],
+  imports: [SidebarComponent, PrivateComponent, RouterLink, ButtonComponent],
   templateUrl: './my-profile.component.html',
   styleUrl: './my-profile.component.scss',
 })
@@ -53,7 +53,7 @@ export class MyProfileComponent implements OnInit {
           this.gender = response.data.userGender
             ? response.data.userGender
             : 'NA';
-          this.role = response.data.roleName;
+          this.role = response.data.userRoleName;
           this.address = response.data.userAddress
             ? response.data.userAddress
             : 'NA';
@@ -67,6 +67,9 @@ export class MyProfileComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+        // if (err.statusText == 'Session Expired') {
+        //   this.storage.logout();
+        // }
         // this.storage.logout();
       },
     });

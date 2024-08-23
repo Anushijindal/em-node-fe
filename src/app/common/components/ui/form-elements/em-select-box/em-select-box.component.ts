@@ -16,12 +16,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 @Component({
-  selector: 'app-em-select',
+  selector: 'em-select-box',
   standalone: true,
-  imports: [MatFormFieldModule, MatSelectModule, MatInputModule,ReactiveFormsModule],
-  templateUrl: './em-select.component.html',
-  styleUrl: './em-select.component.scss',
-  encapsulation:ViewEncapsulation.None,
+  imports: [
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    ReactiveFormsModule,
+  ],
+  templateUrl: './em-select-box.component.html',
+  styleUrl: './em-select-box.component.scss',
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -35,8 +40,8 @@ export class EmSelectComponent implements ControlValueAccessor {
   @Input() selectId = '';
   @Input() selectClass = '';
   @Input() items: any[] = [];
-  @Input() formName!: FormGroup
-  @Input() controlName='';
+  @Input() formName!: FormGroup;
+  @Input() controlName = '';
   @Output() valueChange = new EventEmitter<any>();
 
   value: string = '';

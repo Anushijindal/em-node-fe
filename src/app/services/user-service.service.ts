@@ -2,22 +2,32 @@ import { Injectable } from '@angular/core';
 import { httpService } from './httpServices.service';
 import { BehaviorSubject } from 'rxjs';
 
+interface UserProfile {
+  firstName: string;
+  lastName: string;
+  userRole: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
-export class UserServiceService {
-  user = new BehaviorSubject<any>({});
-  loggedUser = this.user.asObservable();
-  constructor(private httpService: httpService) {
+export class UserService {
+  userProfile = new BehaviorSubject<UserProfile>({
+    firstName: '',
+    lastName: '',
+    userRole: '',
+  });
+  userProfileObservable = this.userProfile.asObservable();
+  constructor(private httpService: httpService) {}
+  userProfileData() {
+    return this.httpService.myProfile();
   }
-  userData() {
-    this.httpService.myProfile().subscribe({
-      next: (response: any) => {
-        this.user.next(response?.data);
-      },
-      error: (err) => {
-        console.log(err);
-      },
+
+  setProfile(userProfile: UserProfile) {
+    this.userProfile.next({
+      firstName: userProfile.firstName,
+      lastName: userProfile.lastName,
+      userRole: userProfile.userRole,
     });
   }
 }

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmSelectComponent } from './em-select.component';
+import { EmSelectComponent } from './em-select-box.component';
 
 describe('EmSelectComponent', () => {
   let component: EmSelectComponent;

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmInputComponent } from './em-input.component';
+import { EmInputComponent } from './em-input-box.component';
 
 describe('EmInputComponent', () => {
   let component: EmInputComponent;
