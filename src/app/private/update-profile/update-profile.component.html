@@ -31,7 +31,7 @@
                 <em-input-box
                   inputType="text"
                   formControlName="userFirstName"
-                  inputPlaceholder="Enter firstName"
+                  inputPlaceholder="Enter First Name"
                   [formName]="updateForm"
                   controlName="userFirstName"
                   inputLabel="First Name"
@@ -59,7 +59,7 @@
                   }
                 </div> -->
                 <em-input-box
-                  inputPlaceholder="Enter lastName"
+                  inputPlaceholder="Enter Last Name"
                   formControlName="userLastName"
                   controlName="userLastName"
                   inputLabel="Last Name"
@@ -268,7 +268,11 @@
                   >
                   } -->
             </div>
+            @if (updateForm.valid) {
             <app-em-button (click)="onUpdate()" class=""></app-em-button>
+            } @else {
+            <app-em-disabled-button></app-em-disabled-button>
+            }
             <!-- <div class="d-grid mt-3">
               <button
                 

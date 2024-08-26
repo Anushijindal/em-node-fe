@@ -31,4 +31,10 @@ export class httpService {
   fetchCity(body:any){
     return this.httpClient.post("http://localhost/employees_management/api/v1/fetchCity/",body)
   }
+  fetchProjects(){
+    return this.httpClient.get("http://localhost/employees_management/api/v1/projects/");
+  }
+  addProject(body:any){
+    return this.httpClient.post("http://localhost/employees_management/api/v1/addProject/",body)
+  }
 }

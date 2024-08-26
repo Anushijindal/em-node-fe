@@ -1,0 +1,39 @@
+<div class="mt-3">
+  <mat-form-field [style.width]="'100%'">
+    <mat-label>{{ datePickerLabel }}</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [value]="value"
+      (dateChange)="onDateChange($event)"
+      [disabled]="disabled"
+      
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker
+      id="{{ datePickerId }}"
+      class="{{ datePickerClass }}"
+      #picker
+    ></mat-datepicker>
+  </mat-form-field>
+</div>
+<!-- <div class="mt-3">
+  <mat-form-field [style.width]="'100%'">
+    <mat-label>{{ datePickerLabel }}</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [value]="value"
+      (dateChange)="onDateChange($event)"
+      [disabled]="disabled"
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker
+      id="{{ datePickerId }}"
+      class="{{ datePickerClass }}"
+      #picker
+    ></mat-datepicker>
+  </mat-form-field>
+</div> -->

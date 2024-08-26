@@ -14,6 +14,7 @@ import { EmSelectComponent } from '../../common/components/ui/form-elements/em-s
 import { EmButtonComponent } from '../../common/components/ui/form-elements/em-button/em-button.component';
 import { MatSelectChange } from '@angular/material/select';
 import { UserService } from '../../services/user-service.service';
+import { EmDisabledButtonComponent } from '../../common/components/ui/form-elements/em-disabled-button/em-disabled-button.component';
 @Component({
   selector: 'app-update-profile',
   standalone: true,
@@ -24,6 +25,7 @@ import { UserService } from '../../services/user-service.service';
     MatInputModule,
     EmSelectComponent,
     EmButtonComponent,
+    EmDisabledButtonComponent
   ],
   templateUrl: './update-profile.component.html',
   styleUrl: './update-profile.component.scss',

@@ -1,0 +1,191 @@
+<div class="auth-main w-2/3 m-auto">
+    <div class="auth-wrapper v3">
+      <div class="auth-form">
+        <div class="card my-5">
+          <div class="card-body">
+            <form [formGroup]="updateProjectForm">
+              <div class="d-flex justify-content-between align-items-end">
+                <h3 class="mb-0"><b>Add Project</b></h3>
+                <!-- <a [routerLink]="['']" class="link-primary">Home</a> -->
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <em-input-box
+                    inputType="text"
+                    formControlName="projectName"
+                    inputPlaceholder="Enter Project Name"
+                    [formName]="updateProjectForm"
+                    controlName="projectName"
+                    inputLabel="Project Name"
+                    inputId="projectName"
+                    inputClass=""
+                  ></em-input-box>
+                </div>
+                <div class="col-md-6">
+                  <em-input-box
+                    inputPlaceholder="Enter Project Technology"
+                    formControlName="projectTechnology"
+                    controlName="projectTechnology"
+                    inputLabel="Project Technology"
+                    inputType="text"
+                    [formName]="updateProjectForm"
+                    inputId="technology"
+                    inputClass=""
+                  ></em-input-box>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- <em-input-box
+                    inputType="datetime-local"
+                    formControlName="deadline"
+                    [formName]="updateProjectForm"
+                    inputPlaceholder="Enter Deadline Date"
+                    inputLabel="Deadline Date"
+                    controlName="deadline"
+                    inputId="deadline"
+                    inputClass=""
+                  ></em-input-box> -->
+                  <em-date-picker-input
+                    formControlName="deadline"
+                    datePickerLabel="Project Deadline"
+                    datePickerId="deadline"
+                    datePickerClass="deadline"
+                  ></em-date-picker-input>
+                </div>
+                <!-- <input type="datetime-local"> -->
+                <div class="col-md-6">
+                  <em-input-box
+                    inputType="date"
+                    formControlName="startDate"
+                    [formName]="updateProjectForm"
+                    inputPlaceholder="Enter start Date"
+                    inputLabel="start Date"
+                    controlName="startDate"
+                    inputId="startDate"
+                    inputClass=""
+                  ></em-input-box>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <em-input-box
+                    inputType="text"
+                    formControlName="lead"
+                    [formName]="updateProjectForm"
+                    inputPlaceholder="Enter Laed Name"
+                    inputLabel="Lead Name"
+                    controlName="lead"
+                    inputId="lead"
+                    inputClass=""
+                  ></em-input-box>
+                </div>
+                <div class="col-md-4">
+                  <em-input-box
+                    inputType="text"
+                    formControlName="manager"
+                    [formName]="updateProjectForm"
+                    inputPlaceholder="Enter manager name"
+                    inputLabel="Manager Name"
+                    controlName="manager"
+                    inputId="manager"
+                    inputClass=""
+                  ></em-input-box>
+                </div>
+                <div class="col-md-4">
+                  <em-input-box
+                    inputType="text"
+                    formControlName="client"
+                    [formName]="updateProjectForm"
+                    inputPlaceholder="Enter client name"
+                    inputLabel="Client Name"
+                    controlName="client"
+                    inputId="client"
+                    inputClass=""
+                  ></em-input-box>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <em-input-box
+                    inputType="text"
+                    formControlName="description"
+                    [formName]="updateProjectForm"
+                    inputPlaceholder="Enter Description"
+                    inputLabel="Description"
+                    controlName="description"
+                    inputId="description"
+                    inputClass=""
+                  ></em-input-box>
+                </div>
+                <div class="col-md-6">
+                  <em-select-box
+                    selectLabel="Choose Project Status"
+                    selectClass="status"
+                    selectId="status"
+                    formControlName="status"
+                    controlName="status"
+                    [formName]="updateProjectForm"
+                  ></em-select-box>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <em-select-box
+                    selectLabel="Choose Management Tool"
+                    selectClass="management"
+                    selectId="management"
+                    formControlName="management"
+                    controlName="management"
+                    [formName]="updateProjectForm"
+                  ></em-select-box>
+                </div>
+                <div class="col-md-6">
+                  <em-input-box
+                    inputType="text"
+                    formControlName="management_tool_link"
+                    [formName]="updateProjectForm"
+                    inputPlaceholder="Enter Management Tool Link"
+                    inputLabel="Management Tool Link"
+                    controlName="management_tool_link"
+                    inputId="managementLink"
+                    inputClass=""
+                  ></em-input-box>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <em-select-box
+                    selectLabel="Choose Repository Tool"
+                    selectClass="repository"
+                    selectId="repository"
+                    formControlName="repository"
+                    controlName="repository"
+                    [formName]="updateProjectForm"
+                  ></em-select-box>
+                </div>
+                <div class="col-md-6">
+                  <em-input-box
+                    inputType="text"
+                    formControlName="repository_tool_url"
+                    [formName]="updateProjectForm"
+                    inputPlaceholder="Enter Repository Link"
+                    inputLabel="Repository Link"
+                    controlName="repository_tool_url"
+                    inputId="repositoryLink"
+                    inputClass=""
+                  ></em-input-box>
+                </div>
+              </div>
+              @if (updateProjectForm.valid) {
+              <app-em-button class=""></app-em-button>
+              } @else {
+              <app-em-disabled-button></app-em-disabled-button>
+              }
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
