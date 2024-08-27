@@ -11,7 +11,8 @@ import {
   createGrid,
 } from 'ag-grid-community';
 import { right } from '@popperjs/core';
-import { deleteProjectButton, } from '../custom-project-button/custom-project-button.component';
+import { deleteProjectButton } from '../custom-project-button/custom-project-button.component';
+import { httpService } from '../../services/httpServices.service';
 @Component({
   selector: 'app-project-list',
   standalone: true,
@@ -21,12 +22,15 @@ import { deleteProjectButton, } from '../custom-project-button/custom-project-bu
 })
 export class ProjectListComponent {
   isPagination = true;
+  showAddBtn=true
+  navigateUrl="/projects/add-project"
   defaultCol = {
     sortable: true,
     filter: true,
     editable: false,
     // maxWidth:100
   };
+  constructor(private httpService: httpService) {}
   public colDef: ColDef[] = [
     {
       field: 'project_name',
@@ -90,4 +94,19 @@ export class ProjectListComponent {
       cellRenderer: deleteProjectButton,
     },
   ];
+  ngOnInit() {
+    this.getData();
+  }
+  rowData: any;
+  getData() {
+    this.httpService.fetchProjects().subscribe({
+      next: (Response: any) => {
+        console.log(Response);
+        this.rowData = Response;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }

@@ -18,7 +18,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-em-table',
   standalone: true,
-  imports: [AgGridAngular, HttpClientModule,RouterLink],
+  imports: [AgGridAngular, HttpClientModule, RouterLink],
   templateUrl: './em-table.component.html',
   // template: "",
   styleUrl: './em-table.component.scss',
@@ -31,10 +31,12 @@ export class EmTableComponent {
   @Input() tableName = '';
   @Input() colDef: any;
   @Input() isPagination = false;
-  @Input() showAddBtn=false;
+  @Input() showAddBtn = false;
   @Input() defaultPageSize = 20;
-  @Input() defaultCol: ColDef = {
-  };
+  @Input() defaultCol: ColDef = {};
+  // @Input() showAdd:Boolean=false;
+  @Input() rowData: any;
+  @Input() navigateURL!: string ;
   onFilterTextBoxChanged() {
     this.gridApi.setGridOption(
       'quickFilterText',
@@ -42,13 +44,13 @@ export class EmTableComponent {
     );
   }
   public rowSelection: 'single' | 'multiple' = 'multiple';
-  public rowData!: any;
+  // public rowData!: any;
   public themeClass: string = 'ag-theme-quartz';
 
   constructor(private http: httpService) {}
-  
+
   onGridReady(params: GridReadyEvent<IOlympicData>) {
     this.gridApi = params.api;
-    this.http.fetchProjects().subscribe((data) => (this.rowData = data));
+    // this.http.fetchProjects().subscribe((data) => (this.rowData = data));
   }
 }

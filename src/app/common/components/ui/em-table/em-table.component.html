@@ -7,7 +7,7 @@
     placeholder="Search"
     (input)="onFilterTextBoxChanged()"
   />
-  <button routerLink="/projects/add-project" >Add</button>
+  @if (showAddBtn) {<button routerLink={{navigateURL}}>Add</button>}
 </div>
 
 <!-- <button (click)="handleClick()">Click Me</button> -->
@@ -18,7 +18,7 @@
   [pagination]="isPagination"
   [paginationPageSize]="defaultPageSize"
   [paginationPageSizeSelector]="pageSizeOption"
-  [rowData]="rowData?.data"
+  [rowData]="rowData"
   [class]="themeClass"
   (gridReady)="onGridReady($event)"
 />

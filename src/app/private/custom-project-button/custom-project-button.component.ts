@@ -1,19 +1,11 @@
 import { ICellRendererAngularComp } from 'ag-grid-angular';
-import { ICellRendererParams } from 'ag-grid-community';
+import { ICellRendererParams, GridApi } from 'ag-grid-community';
 import { Component } from '@angular/core';
 import { httpService } from '../../services/httpServices.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-// import { HttpService } from '../../services/httpServices.service';
-import {
-  ColDef,
-  ColGroupDef,
-  GridApi,
-  GridOptions,
-  GridReadyEvent,
-  ModuleRegistry,
-  createGrid,
-} from 'ag-grid-community';
+import { ProjectListComponent } from '../project-list/project-list.component';
+
 @Component({
   standalone: true,
   template: `
@@ -31,12 +23,14 @@ export class deleteProjectButton implements ICellRendererAngularComp {
   constructor(
     private httpService: httpService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private projectList: ProjectListComponent 
   ) {}
 
   agInit(params: ICellRendererParams): void {
     this.params = params;
     this.id = params.data.project_id;
+    this.gridApi = params.api;
   }
 
   refresh(params: ICellRendererParams): boolean {
@@ -49,15 +43,15 @@ export class deleteProjectButton implements ICellRendererAngularComp {
       next: (response: any) => {
         console.log(response);
         this.toastr.success('Project Deleted Successfully');
-        // this.params.api.refreshCells({ force: true });
+        this.projectList.getData();
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
+
   updateButton() {
     this.router.navigate([`/projects/update-project/${this.id}`]);
-    // alert(`Update button clicked! Row data: ${this.id}`);
   }
 }
