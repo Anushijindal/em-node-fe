@@ -5,7 +5,7 @@
           <div class="card-body">
             <form [formGroup]="updateProjectForm">
               <div class="d-flex justify-content-between align-items-end">
-                <h3 class="mb-0"><b>Add Project</b></h3>
+                <h3 class="mb-0"><b>Update Project</b></h3>
                 <!-- <a [routerLink]="['']" class="link-primary">Home</a> -->
               </div>
               <div class="row">
@@ -52,9 +52,9 @@
                     datePickerId="deadline"
                     datePickerClass="deadline"
                   ></em-date-picker-input>
-                </div>
+                </div></div>
                 <!-- <input type="datetime-local"> -->
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <em-input-box
                     inputType="date"
                     formControlName="startDate"
@@ -66,7 +66,7 @@
                     inputClass=""
                   ></em-input-box>
                 </div>
-              </div>
+              </div> -->
               <div class="row">
                 <div class="col-md-4">
                   <em-input-box
@@ -126,6 +126,7 @@
                     formControlName="status"
                     controlName="status"
                     [formName]="updateProjectForm"
+                    [items]="statusItems"
                   ></em-select-box>
                 </div>
               </div>
@@ -138,6 +139,7 @@
                     formControlName="management"
                     controlName="management"
                     [formName]="updateProjectForm"
+                    [items]="managementItems"
                   ></em-select-box>
                 </div>
                 <div class="col-md-6">
@@ -162,6 +164,7 @@
                     formControlName="repository"
                     controlName="repository"
                     [formName]="updateProjectForm"
+                    [items]="repoItems"
                   ></em-select-box>
                 </div>
                 <div class="col-md-6">
@@ -178,7 +181,7 @@
                 </div>
               </div>
               @if (updateProjectForm.valid) {
-              <app-em-button class=""></app-em-button>
+              <app-em-button (click)="updateProject()" class=""></app-em-button>
               } @else {
               <app-em-disabled-button></app-em-disabled-button>
               }

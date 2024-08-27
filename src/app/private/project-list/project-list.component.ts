@@ -11,6 +11,7 @@ import {
   createGrid,
 } from 'ag-grid-community';
 import { right } from '@popperjs/core';
+import { deleteProjectButton, } from '../custom-project-button/custom-project-button.component';
 @Component({
   selector: 'app-project-list',
   standalone: true,
@@ -86,11 +87,7 @@ export class ProjectListComponent {
       pinned: right,
       sortable: false,
       filter: false,
-      cellRenderer:(params:any)=>{
-        const id=params.data.project_id;
-        console.log(params.data.project_id)
-       return "<a >Delete</a>" +"  "+"<a>Update</a>"
-      }
+      cellRenderer: deleteProjectButton,
     },
   ];
 }

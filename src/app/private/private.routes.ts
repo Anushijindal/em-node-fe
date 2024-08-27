@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmTableComponent } from '../common/components/ui/em-table/em-table.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { AddProjectComponent } from './add-project/add-project.component';
+import { UpdateProjectComponent } from './update-project/update-project.component';
 
 export const routes: Routes = [
   {
@@ -19,7 +20,7 @@ export const routes: Routes = [
           import('./my-profile/my-profile.routes').then((m) => m.routes),
       },
       {
-        path: 'project-list',
+        path: 'projects',
         // component: ProjectListComponent,
         children:[
           {
@@ -29,6 +30,10 @@ export const routes: Routes = [
           {
             path:"",
             component:ProjectListComponent
+          },
+          {
+            path:"update-project/:id",
+            component:UpdateProjectComponent
           }
         ]
       },

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { EmButtonComponent } from '../../common/components/ui/form-elements/em-button/em-button.component';
 import { EmDisabledButtonComponent } from '../../common/components/ui/form-elements/em-disabled-button/em-disabled-button.component';
 import { EmInputComponent } from '../../common/components/ui/form-elements/em-input-box/em-input-box.component';
@@ -20,13 +25,14 @@ import { EmDatePickerInputComponent } from '../../common/components/ui/form-elem
     EmDisabledButtonComponent,
     EmInputComponent,
     EmSelectComponent,
-    EmDatePickerInputComponent
+    EmDatePickerInputComponent,
   ],
   templateUrl: './add-project.component.html',
   styleUrl: './add-project.component.scss',
 })
 export class AddProjectComponent {
   addProjectForm: FormGroup;
+  date!: string;
   statusItems = ['Development_Started', 'Launched', 'Coming_Soon'];
   repoItems = ['GitHub', 'GitLab', 'BigBucket'];
   managementItems = ['Trello', 'Zira'];
@@ -34,28 +40,43 @@ export class AddProjectComponent {
     private formBuilder: FormBuilder,
     private httpService: httpService,
     private toastr: ToastrService,
-    private router:Router
+    private router: Router
   ) {
     this.addProjectForm = this.formBuilder.group({
       startDate: [''],
-      // deadline: ['8/8/2024'],
-      projectName: ['',[Validators.required]],
-      projectTechnology: ['',[Validators.required]],
-      client: ['',[Validators.required]],
-      manager: ['',[Validators.required]],
-      lead: ['',[Validators.required]],
-      description: ['',[Validators.required]],
-      status: ['Coming_Soon',[Validators.required]],
-      management: ['Trello',[Validators.required]],
-      repository: ['GitHub',[Validators.required]],
-      management_tool_link: ['',[Validators.required]],
-      repository_tool_url: ['',[Validators.required]],
+      deadline: [''],
+      projectName: ['', [Validators.required]],
+      projectTechnology: ['', [Validators.required]],
+      client: ['', [Validators.required]],
+      manager: ['', [Validators.required]],
+      lead: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      status: ['Coming_Soon', [Validators.required]],
+      management: ['Trello', [Validators.required]],
+      repository: ['GitHub', [Validators.required]],
+      management_tool_link: ['', [Validators.required]],
+      repository_tool_url: ['', [Validators.required]],
     });
   }
   addProject() {
+    console.log(this.addProjectForm.value.deadline);
+    
+    console.log(
+      this.addProjectForm.value.deadline._i.year +
+        '-' +
+        this.addProjectForm.value.deadline._i.month +
+        '-' +
+        this.addProjectForm.value.deadline._i.date
+    );
+    this.date =
+      this.addProjectForm.value.deadline._i.year +
+      '-' +
+      this.addProjectForm.value.deadline._i.month +
+      '-' +
+      this.addProjectForm.value.deadline._i.date;
     const data = {
       name: this.addProjectForm.value.projectName,
-      // deadline:this.addProjectForm.value.deadline,
+      deadline: this.date,
       technology: this.addProjectForm.value.projectTechnology,
       client: this.addProjectForm.value.client,
       manager: this.addProjectForm.value.manager,
@@ -71,7 +92,7 @@ export class AddProjectComponent {
       next: (response: any) => {
         console.log(response);
         this.toastr.success('done');
-        this.router.navigate(['/project-list'])
+        this.router.navigate(['/projects']);
       },
       error: (err) => {
         this.toastr.error(err);
