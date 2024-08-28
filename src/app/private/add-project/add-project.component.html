@@ -45,13 +45,12 @@
                 ></em-date-picker-input>
               </div>
               <div class="col-md-6">
-                <!-- <em-date-picker-input
+                <em-date-picker-input
                   formControlName="startDate"
                   datePickerLabel="Project Start Date"
                   datePickerId="startDate"
                   datePickerClass="startdate"
-                ></em-date-picker-input> -->
-                
+                ></em-date-picker-input>
               </div>
             </div>
             <div class="row">
@@ -91,7 +90,7 @@
                   inputClass=""
                 ></em-input-box>
               </div>
-            </div> 
+            </div>
             <div class="row">
               <div class="col-md-6">
                 <em-input-box
@@ -167,11 +166,25 @@
                 ></em-input-box>
               </div>
             </div>
-            @if (addProjectForm.valid) {
-            <app-em-button (click)="addProject()" class=""></app-em-button>
-            } @else {
-            <app-em-disabled-button></app-em-disabled-button>
-            }
+            <div class="flex flex-row justify-center gap-6 w-[100%]">
+              <div class="w-[50%]">
+                <app-em-button
+                  routerLink="/my-profile/projects"
+                  btnLabel="Cancel"
+                ></app-em-button>
+              </div>
+              <div class="w-[50%]">
+                @if (addProjectForm.valid) {
+                <app-em-button
+                  btnLabel="Submit"
+                  (click)="addProject()"
+                  class=""
+                ></app-em-button>
+                } @else {
+                <app-em-disabled-button></app-em-disabled-button>
+                }
+              </div>
+            </div>
           </form>
         </div>
       </div>

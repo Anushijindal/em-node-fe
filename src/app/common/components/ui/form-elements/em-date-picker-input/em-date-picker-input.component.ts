@@ -4,38 +4,19 @@ import {
   forwardRef,
   Input,
   ViewEncapsulation,
+  ChangeDetectorRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import * as _moment from 'moment';
-import {default as _rollupMoment} from 'moment';
-
-const moment = _rollupMoment || _moment;
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-//  now = moment();
-// moment(this.datepicker.value).format('YYYY/MM/DD')
 
 @Component({
   selector: 'em-date-picker-input',
   standalone: true,
   providers: [
-    // provideMomentDateAdapter(),
     provideNativeDateAdapter(),
-    // provideNativeDateAdapter(MY_FORMATS),
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => EmDatePickerInputComponent),
@@ -52,10 +33,10 @@ export class EmDatePickerInputComponent implements ControlValueAccessor {
   @Input() datePickerLabel = '';
   @Input() datePickerClass = '';
   @Input() datePickerId = '';
-  //  now = moment();
+// @Input() matLabel=''
   value: Date | null = null;
   disabled = false;
-
+  constructor(private cdr: ChangeDetectorRef) {}
   onChange = (value: Date | null) => {};
   onTouched = () => {};
 
@@ -65,14 +46,21 @@ export class EmDatePickerInputComponent implements ControlValueAccessor {
     this.onTouched();
   }
 
+  // writeValue(value: Date | string | null): void {
+  //   if (typeof value === 'string') {
+  //     this.value = new Date(value);
+  //   } else {
+  //     this.value = value || null;
+  //   }
+  // }
   writeValue(value: Date | string | null): void {
     if (typeof value === 'string') {
       this.value = new Date(value);
     } else {
       this.value = value || null;
     }
+    this.cdr.detectChanges();
   }
-
   registerOnChange(fn: (value: Date | null) => void): void {
     this.onChange = fn;
   }

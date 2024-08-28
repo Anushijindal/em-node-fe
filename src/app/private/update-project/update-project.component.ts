@@ -13,8 +13,9 @@ import {
 import { httpService } from '../../services/httpServices.service';
 import { HttpParams } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import moment from 'moment';
 
 @Component({
   selector: 'app-update-project',
@@ -26,6 +27,7 @@ import { ToastrService } from 'ngx-toastr';
     EmSelectComponent,
     EmDatePickerInputComponent,
     ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './update-project.component.html',
   styleUrl: './update-project.component.scss',
@@ -33,7 +35,7 @@ import { ToastrService } from 'ngx-toastr';
 export class UpdateProjectComponent {
   updateProjectForm: FormGroup;
   routeSub!: Subscription;
-  date!:string
+  date!: string;
   statusItems = ['Development_Started', 'Launched', 'Coming_Soon'];
   repoItems = ['GitHub', 'GitLab', 'BigBucket'];
   managementItems = ['Trello', 'Zira'];
@@ -46,7 +48,7 @@ export class UpdateProjectComponent {
     private router: Router
   ) {
     this.updateProjectForm = this.formBuilder.group({
-      // startDate: [''],
+      startDate: ['', [Validators.required]],
       deadline: ['', [Validators.required]],
       projectName: ['', [Validators.required]],
       projectTechnology: ['', [Validators.required]],
@@ -63,8 +65,8 @@ export class UpdateProjectComponent {
   }
   ngOnInit() {
     this.routeSub = this.route.params.subscribe((params) => {
-      console.log(params); //log the entire params object
-      console.log(params['id']); //log the value of id
+      console.log(params);
+      console.log(params['id']);
       this.id = params['id'];
     });
     this.getProjectData();
@@ -76,7 +78,8 @@ export class UpdateProjectComponent {
         console.log(response);
         this.updateProjectForm.patchValue({
           client: response.data[0].project_client,
-          deadline: response?.data[0]?.project_deadline_date,
+          deadline: new Date(response?.data[0]?.project_deadline_date),
+          startDate: new Date(response?.data[0]?.project_start_date),
           projectName: response.data[0].project_name,
           projectTechnology: response.data[0].project_technology,
           manager: response.data[0].project_manager,
@@ -96,16 +99,17 @@ export class UpdateProjectComponent {
   }
   updateProject() {
     if (this.updateProjectForm.valid) {
-      this.date =
-      this.updateProjectForm.value.deadline._i.year +
-      '-' +
-      this.updateProjectForm.value.deadline._i.month +
-      '-' +
-      this.updateProjectForm.value.deadline._i.date;
+      const deadline = moment(this.updateProjectForm.value.deadline).format(
+        'YYYY-MM-DD'
+      );
+      const startDate = moment(this.updateProjectForm.value.startDate).format(
+        'YYYY-MM-DD'
+      );
       const data = {
         name: this.updateProjectForm.value.projectName,
         client: this.updateProjectForm.value.client,
-        deadline:this.date,
+        deadline: deadline,
+        startDate: startDate,
         technology: this.updateProjectForm.value.projectTechnology,
         manager: this.updateProjectForm.value.manager,
         lead: this.updateProjectForm.value.lead,
@@ -120,7 +124,7 @@ export class UpdateProjectComponent {
         next: (response: any) => {
           console.log(response);
           this.toastr.success(response.message);
-          this.router.navigate(['/projects']);
+          this.router.navigate(['my-profile/projects']);
         },
         error: (err) => {
           console.log(err);

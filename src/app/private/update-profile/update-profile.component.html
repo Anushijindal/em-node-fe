@@ -5,7 +5,7 @@
         <div class="card-body">
           <form [formGroup]="updateForm">
             <div class="d-flex justify-content-between align-items-end">
-              <h3 class="mb-0"><b>Update Profile</b></h3>
+              <h3 class="mb-0"><b>Edit Profile</b></h3>
               <!-- <a [routerLink]="['']" class="link-primary">Home</a> -->
             </div>
             <div class="row">
@@ -269,7 +269,7 @@
                   } -->
             </div>
             @if (updateForm.valid) {
-            <app-em-button (click)="onUpdate()" class=""></app-em-button>
+            <app-em-button (click)="onUpdate()" btnLabel="Submit" class=""></app-em-button>
             } @else {
             <app-em-disabled-button></app-em-disabled-button>
             }

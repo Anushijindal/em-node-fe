@@ -9,13 +9,13 @@ import { ProjectListComponent } from '../project-list/project-list.component';
 @Component({
   standalone: true,
   template: `
-    <div class="flex justify-between">
-      <button (click)="deleteButton()">Delete</button>
-      <button (click)="updateButton()">Update</button>
+    <div class="flex justify-center gap-4">
+      <button (click)="deleteButton()"><i class="fa-solid fa-trash fa-lg"></i></button>
+      <button (click)="updateButton()"><i class="fa-solid fa-pen-to-square fa-lg"></i></button>
     </div>
   `,
 })
-export class deleteProjectButton implements ICellRendererAngularComp {
+export class customProjectButton implements ICellRendererAngularComp {
   params!: ICellRendererParams;
   id: number = 0;
   private gridApi!: GridApi;
@@ -43,7 +43,7 @@ export class deleteProjectButton implements ICellRendererAngularComp {
       next: (response: any) => {
         console.log(response);
         this.toastr.success('Project Deleted Successfully');
-        this.projectList.getData();
+        this.projectList.getProjectData();
       },
       error: (err) => {
         console.log(err);
@@ -52,6 +52,6 @@ export class deleteProjectButton implements ICellRendererAngularComp {
   }
 
   updateButton() {
-    this.router.navigate([`/projects/update-project/${this.id}`]);
+    this.router.navigate([`/my-profile/projects/edit/${this.id}`]);
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import moment from 'moment';
 import {
   FormBuilder,
   FormGroup,
@@ -14,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { httpService } from '../../services/httpServices.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { EmDatePickerInputComponent } from '../../common/components/ui/form-elements/em-date-picker-input/em-date-picker-input.component';
 @Component({
   selector: 'app-add-project',
@@ -26,6 +27,7 @@ import { EmDatePickerInputComponent } from '../../common/components/ui/form-elem
     EmInputComponent,
     EmSelectComponent,
     EmDatePickerInputComponent,
+    RouterLink
   ],
   templateUrl: './add-project.component.html',
   styleUrl: './add-project.component.scss',
@@ -60,23 +62,14 @@ export class AddProjectComponent {
   }
   addProject() {
     console.log(this.addProjectForm.value.deadline);
-    
-    console.log(
-      this.addProjectForm.value.deadline._i.year +
-        '-' +
-        this.addProjectForm.value.deadline._i.month +
-        '-' +
-        this.addProjectForm.value.deadline._i.date
-    );
-    this.date =
-      this.addProjectForm.value.deadline._i.year +
-      '-' +
-      this.addProjectForm.value.deadline._i.month +
-      '-' +
-      this.addProjectForm.value.deadline._i.date;
+    const deadline = moment(this.addProjectForm.value.deadline).format('YYYY-MM-DD');
+    const startDate = moment(this.addProjectForm.value.startDate).format('YYYY-MM-DD');
+
+    console.log(deadline);
     const data = {
       name: this.addProjectForm.value.projectName,
-      deadline: this.date,
+      deadline: deadline,
+      startDate:startDate,
       technology: this.addProjectForm.value.projectTechnology,
       client: this.addProjectForm.value.client,
       manager: this.addProjectForm.value.manager,
@@ -91,8 +84,8 @@ export class AddProjectComponent {
     this.httpService.addProject(data).subscribe({
       next: (response: any) => {
         console.log(response);
-        this.toastr.success('done');
-        this.router.navigate(['/projects']);
+        this.toastr.success('Successfully Added');
+        this.router.navigate(['/my-profile/projects']);
       },
       error: (err) => {
         this.toastr.error(err);

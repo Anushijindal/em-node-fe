@@ -30,7 +30,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Default',
         type: 'item',
         classes: 'nav-item',
-        url: '/dashboard',
+        url: 'projects',
         icon: 'dashboard',
         breadcrumbs: false
       }
