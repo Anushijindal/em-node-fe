@@ -1,49 +1,82 @@
-import { HttpClient,HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class httpService {
-
-  constructor(private httpClient:HttpClient,private httpParams:HttpParams) { }
-  loginPost(body:any){
-    return this.httpClient.post('http://localhost/employees_management/api/v1/auth/login/',body);
-  };
-  signupPost(body:any){
-    return this.httpClient.post('http://localhost/employees_management/api/v1/auth/signup/',body)
+  constructor(private httpClient: HttpClient, private httpParams: HttpParams) {}
+  loginPost(body: any) {
+    return this.httpClient.post(
+      'http://localhost/employees_management/api/v1/auth/login/',
+      body
+    );
   }
-  myProfile(){
-    return this.httpClient.get("http://localhost/employees_management/api/v1/me/")
+  signupPost(body: any) {
+    return this.httpClient.post(
+      'http://localhost/employees_management/api/v1/auth/signup/',
+      body
+    );
   }
-  updateProfile(body:any){
-    return this.httpClient.put("http://localhost/employees_management/api/v1/updateProfile/",body)
+  myProfile() {
+    return this.httpClient.get(
+      'http://localhost/employees_management/api/v1/me/'
+    );
   }
-  changePassword(body:any){
-    return this.httpClient.put("http://localhost/employees_management/api/v1/changePassword/",body)
+  updateProfile(body: any) {
+    return this.httpClient.put(
+      'http://localhost/employees_management/api/v1/updateProfile/',
+      body
+    );
   }
-  fetchCountry(){
-    return this.httpClient.get("http://localhost/employees_management/api/v1/fetchCountry/")
+  changePassword(body: any) {
+    return this.httpClient.put(
+      'http://localhost/employees_management/api/v1/changePassword/',
+      body
+    );
   }
-  fetchState(body:any){
-    return this.httpClient.post("http://localhost/employees_management/api/v1/fetchState/",body)
+  fetchCountry() {
+    return this.httpClient.get(
+      'http://localhost/employees_management/api/v1/fetchCountry/'
+    );
   }
-  fetchCity(body:any){
-    return this.httpClient.post("http://localhost/employees_management/api/v1/fetchCity/",body)
+  fetchState(body: any) {
+    return this.httpClient.post(
+      'http://localhost/employees_management/api/v1/fetchState/',
+      body
+    );
   }
-  fetchProjects(){
-    return this.httpClient.get("http://localhost/employees_management/api/v1/projects/");
+  fetchCity(body: any) {
+    return this.httpClient.post(
+      'http://localhost/employees_management/api/v1/fetchCity/',
+      body
+    );
   }
-  addProject(body:any){
-    return this.httpClient.post("http://localhost/employees_management/api/v1/addProject/",body)
+  fetchProjects() {
+    return this.httpClient.get(
+      'http://localhost/employees_management/api/v1/projects/'
+    );
   }
-  deleteProject(id:any){
-    return this.httpClient.delete(`http://localhost/employees_management/api/v1/deleteProject/?id=${id}`)
+  addProject(body: any) {
+    return this.httpClient.post(
+      'http://localhost/employees_management/api/v1/addProject/',
+      body
+    );
   }
-  updateProject(id:any,body:any){
-    return this.httpClient.put(`http://localhost/employees_management/api/v1/updateProject/index.php?id=${id}`,body)
+  deleteProject(id: any) {
+    return this.httpClient.delete(
+      `http://localhost/employees_management/api/v1/deleteProject/?id=${id}`
+    );
   }
-  getProject(id:any){
-    return this.httpClient.get(`http://localhost/employees_management/api/v1/getProject/index.php?id=${id}`)
+  updateProject(id: any, body: any) {
+    return this.httpClient.put(
+      `http://localhost/employees_management/api/v1/updateProject/index.php?id=${id}`,
+      body
+    );
+  }
+  getProject(id: any) {
+    return this.httpClient.get(
+      `http://localhost/employees_management/api/v1/getProject/index.php?id=${id}`
+    );
   }
 }
