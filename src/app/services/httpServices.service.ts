@@ -8,7 +8,7 @@ export class httpService {
   constructor(private httpClient: HttpClient, private httpParams: HttpParams) {}
   loginPost(body: any) {
     return this.httpClient.post(
-      'http://localhost/employees_management/api/v1/auth/login/',
+      'http://localhost:8080/api/v1/auth/login',
       body
     );
   }
@@ -20,12 +20,12 @@ export class httpService {
   }
   myProfile() {
     return this.httpClient.get(
-      'http://localhost/employees_management/api/v1/me/'
+      'http://localhost:8080/api/v1/profile'
     );
   }
   updateProfile(body: any) {
     return this.httpClient.put(
-      'http://localhost/employees_management/api/v1/updateProfile/',
+      'http://localhost:8080/api/v1/profile',
       body
     );
   }
@@ -37,18 +37,18 @@ export class httpService {
   }
   fetchCountry() {
     return this.httpClient.get(
-      'http://localhost/employees_management/api/v1/fetchCountry/'
+      'http://localhost:8080/api/v1/fetchCountry'
     );
   }
   fetchState(body: any) {
     return this.httpClient.post(
-      'http://localhost/employees_management/api/v1/fetchState/',
+      'http://localhost:8080/api/v1/fetchState',
       body
     );
   }
   fetchCity(body: any) {
     return this.httpClient.post(
-      'http://localhost/employees_management/api/v1/fetchCity/',
+      'http://localhost:8080/api/v1/fetchCity',
       body
     );
   }

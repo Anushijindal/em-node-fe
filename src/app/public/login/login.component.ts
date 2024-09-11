@@ -66,18 +66,20 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       console.log('Form submitted:', this.loginForm.value);
       const data = {
-        email: this.loginForm.value.email,
-        password: this.loginForm.value.password,
+        userEmail: this.loginForm.value.email,
+        userPassword: this.loginForm.value.password,
       };
       this.httpService.loginPost(data).subscribe({
         next: (response: any) => {
-          if (response.status == 401) {
-            console.log(response.message);
+          if (response.statusCode == 401) {
+            console.log(response);
             this.toastr.error(response.message);
             return;
           }
           console.log(response);
-          this.storage.saveProfileToken(response.jwt);
+          this.storage.saveProfileToken(response?.data?.jwtToken);
+          console.log(response?.data?.jwtToken);
+
           this.toastr.success(response.message);
           this.router.navigateByUrl('my-profile');
         },

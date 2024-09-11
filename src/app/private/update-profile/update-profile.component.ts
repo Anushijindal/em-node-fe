@@ -25,16 +25,16 @@ import { EmDisabledButtonComponent } from '../../common/components/ui/form-eleme
     MatInputModule,
     EmSelectComponent,
     EmButtonComponent,
-    EmDisabledButtonComponent
+    EmDisabledButtonComponent,
   ],
   templateUrl: './update-profile.component.html',
   styleUrl: './update-profile.component.scss',
 })
 export class UpdateProfileComponent {
   updateForm: FormGroup;
-  countryData: []=[];
-  stateData: []=[];
-  cityData: []=[];
+  countryData: [] = [];
+  stateData: [] = [];
+  cityData: [] = [];
   userRole: string = '';
   constructor(
     private httpService: httpService,
@@ -64,21 +64,21 @@ export class UpdateProfileComponent {
     this.httpService.myProfile().subscribe({
       next: (response: any) => {
         console.log(response.data);
-        this.userRole = response.data.userRoleName;
+        this.userRole = response.data.role;
         this.updateForm.patchValue({
-          userFirstName: response?.data?.userFirstName,
-          userGender: response.data.userGender,
-          userCountry: response.data.userCountry,
-          userLastName: response.data.userLastName,
-          userPhone: response.data.userPhone,
-          userAddress: response.data.userAddress,
-          userState: response.data.userState,
-          userCity: response.data.userCity,
+          userFirstName: response?.data?.firstname,
+          userGender: response.data.gender,
+          userCountry: response.data.country,
+          userLastName: response.data.lastname,
+          userPhone: response.data.phone,
+          userAddress: response.data.address,
+          userState: response.data.state,
+          userCity: response.data.city,
         });
 
         this.fetchCountryData();
         const stateData = {
-          user_country: response.data.userCountry,
+          countryName: response.data.country,
         };
         this.httpService.fetchState(stateData)?.subscribe({
           next: (response: any) => {
@@ -91,7 +91,7 @@ export class UpdateProfileComponent {
         });
 
         const cityData = {
-          user_state: response.data.userState,
+          stateName: response.data.state,
         };
 
         this.httpService.fetchCity(cityData)?.subscribe({
@@ -115,6 +115,8 @@ export class UpdateProfileComponent {
     this.httpService.fetchCountry().subscribe({
       next: (response: any) => {
         console.log(response);
+        console.log(response);
+
         this.countryData = response.data;
 
         console.log(this.countryData);
@@ -130,7 +132,7 @@ export class UpdateProfileComponent {
     const country = selectElement;
     console.log(country, 'asmndjhasdmjhasd&&');
     const stateData = {
-      user_country: country,
+      countryName: country,
     };
 
     this.httpService.fetchState(stateData)?.subscribe({
@@ -155,7 +157,7 @@ export class UpdateProfileComponent {
     console.log(state, 'asmndjhasdmjhasd&&');
 
     const cityData = {
-      user_state: state,
+      stateName: state,
     };
 
     this.httpService.fetchCity(cityData)?.subscribe({
@@ -175,14 +177,14 @@ export class UpdateProfileComponent {
   onUpdate() {
     if (this.updateForm.valid) {
       const data = {
-        user_first_name: this.updateForm.value.userFirstName,
-        user_last_name: this.updateForm.value.userLastName,
-        user_gender: this.updateForm.value.userGender,
-        user_country: this.updateForm.value.userCountry,
-        user_state: this.updateForm.value.userState,
-        user_city: this.updateForm.value.userCity,
-        user_street_address: this.updateForm.value.userAddress,
-        user_phone: this.updateForm.value.userPhone,
+        firstname: this.updateForm.value.userFirstName,
+        lastname: this.updateForm.value.userLastName,
+        gender: this.updateForm.value.userGender,
+        country: this.updateForm.value.userCountry,
+        state: this.updateForm.value.userState,
+        city: this.updateForm.value.userCity,
+        address: this.updateForm.value.userAddress,
+        phone: this.updateForm.value.userPhone,
       };
       // this.userService.user.
       this.httpService.updateProfile(data).subscribe({

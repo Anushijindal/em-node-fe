@@ -41,27 +41,27 @@ export class MyProfileComponent implements OnInit {
   getUser() {
     this.httpService.myProfile().subscribe({
       next: (response: any) => {
-        if (response.status != 200) {
+        if (response.statusCode != 200) {
           this.toster.error(response.message);
           this.storage.logout();
         } else {
           console.log(response.data);
           this.userName =
-            response.data.userFirstName + ' ' + response.data.userLastName;
-          this.email = response.data.userEmail;
-          this.phone = response.data.userPhone ? response.data.userPhone : 'NA';
-          this.gender = response.data.userGender
-            ? response.data.userGender
+            response.data.firstname + ' ' + response.data.lastname;
+          this.email = response.data.email;
+          this.phone = response.data.phone ? response.data.phone : 'NA';
+          this.gender = response.data.gender
+            ? response.data.gender
             : 'NA';
-          this.role = response.data.userRoleName;
-          this.address = response.data.userAddress
-            ? response.data.userAddress
+          this.role = response.data.role;
+          this.address = response.data.address
+            ? response.data.address
             : 'NA';
-          this.country = response.data.userCountry
-            ? response.data.userCountry
+          this.country = response.data.country
+            ? response.data.country
             : 'NA';
-          this.state = response.data.userState ? response.data.userState : 'NA';
-          this.city = response.data.userCity ? response.data.userCity : 'NA';
+          this.state = response.data.state ? response.data.state : 'NA';
+          this.city = response.data.city ? response.data.city : 'NA';
           this.image = response.data.userImage;
         }
       },
